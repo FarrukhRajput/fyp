@@ -14,3 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/item-catagory' , 'ItemCatagory@index')->name('item-catagory');
+
+Route::get('/item-create-create', 'ItemCatagory@createCatagory')->name('item-catagory-create');

@@ -1,6 +1,4 @@
-html{
-    font-size: 62.5%;
-}
+
 
 body{
     background: #f7f9fc;
@@ -21,13 +19,27 @@ a:hover{
     padding: 0;
 }
 
+button:focus{
+    outline: 0;
+    border: 0;
+}
+
+.card{
+    box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
+}
+
+.theme-bg{
+    color: wheat;
+    background-color: #563d7c !important;
+}
+
 /********************
     DASHBOARD BRAND
 ********************/
 .dashboard-brand{
     display: inline-block;
-    width: 23rem;
-    height: 8rem;
+    width: 230px;
+    max-height: 80px;
     background: #563d7c;
     transition: all 0.1s ease;
 }
@@ -35,10 +47,10 @@ a:hover{
 .brand-abbr , 
 .brand-title{
     display: inline-block;
-    padding: 1.6rem 2.3rem 1.8rem;
+    padding: 24px 23px;
     color: white;
-    font-size: 2rem;
-    line-height: 4.6rem;
+    font-size: 24px;
+ 
     transition: all 0.4s ease;
     letter-spacing: 0.55px;
 }
@@ -56,22 +68,25 @@ a:hover{
     flex: 1 auto;
     background: white;
     box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
+    max-height: 80px;
 }
 
 .dashboard-nav{
     display: flex;
     flex: 1 auto;
     justify-content: space-between;
-    margin: 1.8rem 2rem 1rem;
+    margin: 18px 20px 10px;
 }
 
 .menuBtn{
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     cursor: pointer;
     color: #6c757d;
     border-radius: 50%;
     padding: .78rem;
+    text-align: center;
+    font-size: 18px;
 }
 
 .menuBtn:hover{
@@ -85,22 +100,27 @@ a:hover{
 
 .navbar-right-icons{
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    padding-top: 3px;
     color: #6c757d;
+    border-radius: 50%;
 }
 
 .navbar-right-icons > i{
-    font-size: 2.6rem;
+    font-size: 20px;
     cursor: pointer;
+    color: #6c757d;
+    padding: .78rem;
+    text-align: center;
+    font-size: 18px;
+}
+
+.navbar-right-icons:hover{
+    background: rgba(108, 117, 125, 0.249);
 }
 
 .user-icon{
     display: inline-block;
-    height: 4.5rem;
-    width: 4.5rem;
+    height: 48px;
+    width: 48px;
     border: 3px solid #fff;
     border-radius: 50%;
     margin: 0;
@@ -115,8 +135,8 @@ a:hover{
 .user-icon span{
     display: inline-block;
     color: #fff;
-    font-size: 2rem;
-    padding:  .5rem 1rem;
+    font-size: 18px;
+    padding: 8px;
 }
 
 .dropdown-profile {
@@ -126,7 +146,7 @@ a:hover{
 .drop-down {
     display: none;
     z-index: 9999;
-    width: 22rem;
+    width: 220px;
     position: absolute;
     right: 0.5rem;
     top: 5rem;
@@ -156,7 +176,7 @@ a:hover{
 .dropdown-profile li a {
     display: block;
     color: #6c757d;
-    font-size: 1.4rem;
+    font-size: 16px;
 }
 
 .dropdown-profile li a:hover{
@@ -184,7 +204,7 @@ a:hover{
     position: relative;
     display: block;
     float: left;
-    width: 23rem;
+    width: 230px;
     height: 100vh;
     background: #563d7c;
     transition: all .1s ease;
@@ -200,7 +220,7 @@ a:hover{
     position: relative;
     display: block;
     color: white;
-    padding: 1.6rem 2.3rem;
+    padding: 12px 23px;
     transition: top 0.2s ease-in;
     backface-visibility: hidden;
 }
@@ -222,9 +242,9 @@ a:hover{
 
 .nav-item span ,
 .nav-dropdown span{
-    margin-left: .5rem;
+    margin-left: 16px;
     text-transform: capitalize;
-    font-size: 1.6rem;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
 }
@@ -237,6 +257,7 @@ a:hover{
 .arrow{
     position: absolute;
     right: 1.5rem;
+    font-size: 16px !important; 
     transition : transform 0.3s ease-out;
 }
 
@@ -254,13 +275,13 @@ a:hover{
 .nav-subitem{
     display: block;
     text-transform: capitalize;
-    font-size: 1.4rem;
-    padding: .8rem 2rem .8rem 5rem;
+    font-size: 14px;
+    padding: 8px 20px 8px 58px;
     transition: all .2s;
 }
 
 .mini-nav{
-    width: 6rem;
+    width: 66px;
 }
 
 .rotate-arrow{
@@ -280,7 +301,7 @@ a:hover{
 
 .dashboard-content-area{
     min-height: 1157px;
-    margin-left: 23rem;
+    margin-left: 230px;
     display: block;
     padding: 2.2rem 1.875rem 0;
 }
@@ -289,13 +310,22 @@ a:hover{
 
 
 .dashboard-content-padding{
-    margin-left: 6rem;
+    margin-left: 66px;
 }
 
 /*********************************
 ===== DASHBOARD CONTENT AREA =====
 *********************************/
 
+
+
+
+.page-title{
+    color: rgba(0, 0, 0, 0.6) !important;
+    border-bottom: 1.5px solid #e3eaef;
+    padding-bottom: 10px;
+    margin-bottom: 1rem;
+}
 
 
 .gapper-1{

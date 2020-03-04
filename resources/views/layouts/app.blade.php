@@ -15,9 +15,10 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-    <!-- Google fonts -->
+    <!-- FontAwesome -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet">  
 
     <!-- Styles -->
     <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
@@ -37,12 +38,13 @@
         <nav class="dashboard-navbar navbar-expand-md" role="navigation">
             <div class="dashboard-nav">
                 <span class="menuBtn">
-                    <i class="material-icons ">menu</i>
+                    <i class="fas fa-bars"></i>
                 </span>
 
                 <div class="d-inline-block navbar-right mr-4">
                     <div class="navbar-right-icons">
-                        <i class="material-icons">notification_important</i>
+                    <i class="fas fa-bell"></i>
+                        
                     </div>
 
                     <div class="user-icon">
@@ -54,20 +56,20 @@
                             <ul>
                                 <li>
                                     <a href="#" class="hvr-icon-forward">
-                                        <i class="material-icons hvr-icon">person_outline</i>
+                                    <i class="far fa-user hvr-icon"></i>
                                         <span>My Profile</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="hvr-icon-forward">
-                                        <i class="material-icons hvr-icon">lock</i>
+                                        <i class="fas fa-lock hvr-icon"></i>
                                         <span>Lock Screen</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('logout') }}" class="hvr-icon-forward" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <i class="material-icons hvr-icon">vpn_key</i>
+                                        document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-key hvr-icon"></i>
                                         <span>{{ __('Logout') }}</span>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -93,21 +95,21 @@
 
                 <li> 
                     <a class="nav-item" href="/" >
-                        <i class="material-icons">dashboard</i>
+                        <i class="fas fa-tachometer-alt"></i>
                         <span>dashboard</span>
                     </a>
                 </li>
 
                 <li > 
                     <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
-                        <i class="material-icons">store</i>
+                        <i class="fas fa-store"></i>
                         <span>Store</span>
-                        <i class="material-icons arrow">keyboard_arrow_right</i>
+                        <i class="fas fa-chevron-right arrow"></i>
                     </a>
 
                     <ul class="nav-sublist d-none">
                         <li >
-                            <a class="nav-subitem" href="#">Items</a>
+                            <a class="nav-subitem" href="{{route('item-catagory')}}">Item Catagory</a>
                         </li>
 
                         <li >
@@ -128,9 +130,9 @@
 
                 <li > 
                     <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
-                        <i class="material-icons">people</i>
+                    <i class="fas fa-users"></i>
                         <span>Employees</span>
-                        <i class="material-icons arrow">keyboard_arrow_right</i>
+                        <i class="fas fa-chevron-right arrow"></i>
                     </a>
 
                     <ul class="nav-sublist d-none">
@@ -212,7 +214,7 @@
         </nav>
 
         @guest
-            <main class="py-4">
+            <main class="py-1">
                 @yield('content')
             </main>
             @endguest
