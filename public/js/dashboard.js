@@ -28,6 +28,7 @@ $(document).ready( () =>{
     navDropdown.each( ( _ , dropdown) => {
         dropdown.addEventListener("click" , (e) => {
             e.preventDefault();
+        
             let x = $(".dashboard-sidebar");
             if(!x.hasClass("mini-nav")){
                 if(dropdown.nextElementSibling.classList.contains("d-none")){
@@ -39,9 +40,10 @@ $(document).ready( () =>{
                         item.previousElementSibling.children[2].classList.remove("rotate-arrow");
                     });
                     
-
                     dropdown.nextElementSibling.classList.remove("d-none");
                     dropdownStatus = true;
+                    console.log(dropdown);
+                   
                     dropdown.children[2].classList.add("rotate-arrow")
                 }
                 else{

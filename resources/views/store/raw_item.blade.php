@@ -25,7 +25,7 @@
         @elseif(session()->has('success'))
         <div class="alert alert-success  p-2 mb-2  "> 
            
-            <?= session()->get('success') ?>
+            <?= session()->get('success')?>
         </div>
 
 
@@ -51,7 +51,7 @@
                             </div>
                         </div>
             
-                        <div class="col-8">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="parentCatagory">Catagory</label>
                                 <select required name="item_catagory" class="form-control" >
@@ -59,10 +59,36 @@
                                         @foreach($catagory as $catagory)
                                             <option value="{{$catagory->id}}" {{@$item->catagory_id == $catagory->id  ?'selected':''}}>{{$catagory->title}}</option>
                                         @endforeach
+                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="parentCatagory">Vendor</label>
+                                <select required name="vendor_id" class="form-control" >
+                                    <option disabled selected>Select ...</option>
+                                        @foreach($vendors as $vendor)
+                                            <option value="{{$vendor->id}}" >{{ ucwords($vendor->f_name.' '.$vendor->l_name) }}</option>
+                                        @endforeach
                                 </select>
                             </div>
                         </div>
 
+                        <div class="col-4">
+                            <div class="form-group">
+                                 <label for="">Reorder Level</label>
+                                 <input value="{{@$item->reorder_level}}" name="reorder_level" min="0" type="number" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                 <label for="">Reorder Quantity</label>
+                                 <input value="{{@$item->reorder_qty}}" name="reorder_qty" min="0" type="number" class="form-control" placeholder="">
+                            </div>
+                        </div>                
+                        
+                        
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="" class="form-label"> Unit</label>
@@ -72,19 +98,6 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
-                            <div class="form-group">
-                                 <label for="">Reorder Level</label>
-                                 <input value="{{@$item->reorder_level}}" name="reorder_level" min="0" type="number" class="form-control" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                 <label for="">Reorder Quantity</label>
-                                 <input value="{{@$item->reorder_qty}}" name="reorder_qty" min="0" type="number" class="form-control" placeholder="">
-                            </div>
-                        </div>                   
                                               
                     </div>
                     
@@ -107,5 +120,47 @@
         </div>
     </div>
 </div>
+
+
+@section('addJavaScript')
+    
+<script>
+
+    $(document).ready(
+        
+        () => {
+            $("#group").change(
+                () => {
+                    var $id = $("#group option:selected").val();
+                    var $designation = $("#designation");
+                    $designation.removeAttr('disabled');
+                   
+                    $.ajax(
+                        {
+                            type: 'GET',
+                            url:'/staff-group/getDesignation/'+$id,
+                            dataType: 'json',
+                            success: function(designations){
+
+                                $designation.empty(); 
+                                $.each(designations , function ( i , designation){
+                                    $designation.append("<option value="+designation.id+">"+designation.title+"</option>");
+                                });
+                            }
+                        }
+                    )
+                }
+            );
+
+            $("#imageUpload").change(function() {
+                readURL(this);
+            });
+
+        }
+    )
+
+</script>
+
+@endsection
 
 @endsection

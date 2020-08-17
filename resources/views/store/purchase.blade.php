@@ -10,11 +10,12 @@
 
 <h4 class="page-title">Purchase</h4>
 
-<a href="{{route('purchase.create')}}" class="btn btn-theme mb-3">Add Purchase</a>
+<a href="{{route('purchase.create')}}" class="btn btn-theme mb-3"> <i class="fas fa-plus mr-2"></i>Add Purchase</a>
 <div class="row">
 
      <div class="col-12">
         <div class="card">
+
             <div class="card-body ">
                 <div class="card-title py-2"> 
                     <h5>Manage Purchases</h5>

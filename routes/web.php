@@ -37,6 +37,7 @@ Route::prefix('/vendor')->group( function(){
     Route::get('/{vendor}/delete','VendorsController@destroy')->name('vendor.delete');
     Route::get('/create','VendorsController@create')->name('vendor.create');
     Route::post('/create' ,'VendorsController@store')->name('vendor.store');
+    Route::get('/{id}/allProducts' , 'VendorsController@allVendorProducts')->name('vendor.allVendorProducts');
 });
 
 

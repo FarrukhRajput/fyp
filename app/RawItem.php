@@ -14,5 +14,10 @@ class RawItem extends Model
         return $this->belongsTo('App\ItemCatagory');
     }
 
+    public function vendor()
+    {   
+        return $this->belongsTo(Vendor::class);
+    }
+
   
 }

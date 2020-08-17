@@ -42,7 +42,8 @@ button:focus{
     display: inline-block;
     width: 230px;
     max-height: 80px;
-    background: #1c77e6f7;
+    /* background: #1c77e6f7; */
+    background: #283846;
     transition: all 0.1s ease;
 }
 
@@ -214,7 +215,8 @@ button:focus{
     float: left;
     width: 230px;
     height: 100%;
-    background: #1c77e6f7;
+    /* background: #1c77e6f7; */
+    background: #283846;
     transition: all .1s ease;
 }
 
@@ -223,7 +225,12 @@ button:focus{
     padding: 0px;
 }
 
-.nav-item , 
+
+.nav-item:active{
+    background: red;
+}
+
+.nav-item, 
 .nav-dropdown {
     position: relative;
     display: block;
@@ -270,7 +277,8 @@ button:focus{
 }
 
 .nav-sublist{
-    background:     #293442;
+    background:     #1eb294;
+    /* background:     #293442; */
     color: white;
     padding: .5rem 0 .5rem;
     list-style: none;
@@ -315,10 +323,13 @@ button:focus{
 }
 
 
-
-
 .dashboard-content-padding{
     margin-left: 66px;
+}
+
+
+.active{
+    background: #1eb294;
 }
 
 /*********************************

@@ -16,10 +16,10 @@ class RawItemController extends Controller
     }
 
     public function index(){
-        // $vendors = Vendor::all();
+        $vendors = Vendor::all();
         $catagory = ItemCatagory::all();
 
-        return view('store.raw_item', ['catagory' => $catagory ] );
+        return view('store.raw_item', ['catagory' => $catagory  , 'vendors' => $vendors] );
     }
 
 
@@ -28,13 +28,15 @@ class RawItemController extends Controller
         $request->validate([
             'title' => 'required',
             'item_catagory' => 'required',
-            'unit' => 'required'
+            'unit' => 'required',
+            'vendor_id' => 'required'
         ]);
     
         if($request->id){
             $rawItem = RawItem::find($request->id);
             $rawItem->title = $request->title;
             $rawItem->catagory_id = $request->item_catagory;
+            $rawItem->vendor_id = $request->vendor_id;
             $rawItem->measuring_unit = $request->unit;
             $rawItem->reorder_level = $request->reorder_level;
             $rawItem->reorder_qty = $request->reorder_qty;
@@ -45,6 +47,7 @@ class RawItemController extends Controller
             $rawItem = new RawItem;       
             $rawItem->title = $request->title;
             $rawItem->catagory_id = $request->item_catagory;
+            $rawItem->vendor_id = $request->vendor_id;
             $rawItem->measuring_unit = $request->unit;
             $rawItem->reorder_level = $request->reorder_level;
             $rawItem->reorder_qty = $request->reorder_qty;

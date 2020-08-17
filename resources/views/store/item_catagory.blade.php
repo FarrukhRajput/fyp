@@ -66,6 +66,7 @@
                         <button type="submit" class="btn btn-primary mr-3">{{@$catagory->id ?  'Update': 'Create' }}</button>
                         @if(@$catagory->id)
                             <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$catagory->title}} &#034; ?')" href="{{route('catagory.delete' ,['vendor' => $catagory->id] )}}" class="btn btn-danger">Delete</a>
+                        
                         @else
                           <button type="reset" class="btn btn-danger">Clear</button>
                         @endif
@@ -119,6 +120,7 @@
                                 
                                 @else
                                     <td class="d-flex justify-content-center" >
+                                        
                                         <a onclick="return confirm('Cannot Edit &#034; {{ ucwords($catagory->title)}} &#034; ?')" href="#" class="btn btn-primary mr-3">
                                             <i class="fas fa-edit"></i>
                                         </a>

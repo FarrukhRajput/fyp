@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Vendor;
 use App\Purchase;
 use Illuminate\Http\Request;
+
 
 class PurchaseController extends Controller
 {
@@ -24,7 +26,10 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        return view('store.create_purchase');
+        $vendors = Vendor::all();
+        // dd($vendors);
+
+        return view('store.create_purchase')->withVendors($vendors);
     }
 
     /**

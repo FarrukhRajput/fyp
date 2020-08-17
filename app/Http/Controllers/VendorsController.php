@@ -34,6 +34,16 @@ class VendorsController extends Controller
     }
 
 
+    public function allVendorProducts($id)
+    {
+        $products = Vendor::find($id)->allProducts()->get();
+
+        return response()->json([
+            'message' => "success",
+            'data' => $products
+        ]);
+    }
+
 
     public function edit($id){
         $title = "edit vendor"; 
@@ -86,9 +96,7 @@ class VendorsController extends Controller
         }
 
         $vendor->delete();
-        return redirect()
-            ->route('vendor.index')
-            ->with('message', "Vendor Deleted Successfully");
+        return redirect()->route('vendor.index')->with('message', "Vendor Deleted Successfully");
 
     }
 
