@@ -7,22 +7,32 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Restro') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    {{-- icon    --}}
+    <link rel="icon" href="">
+
+    <!-- Font Style -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
     <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet">  
 
     <!-- Styles -->
     <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap/switch.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/dataTable/dataTable.css')}}"> 
+    <link rel="stylesheet" href="{{asset('css/dataTable/dataTable.min.css')}}"> 
+   
+
+
+    {{-- Custom Style Sheet Addition Template --}}
+    @yield('addStyle')
+
+    {{-- Custom Style Sheet --}}
     <link href="{{ asset('css/stylesheet.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -100,33 +110,6 @@
                     </a>
                 </li>
 
-                <li > 
-                    <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
-                        <i class="fas fa-store"></i>
-                        <span>Store</span>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-
-                    <ul class="nav-sublist d-none">
-                        <li >
-                            <a class="nav-subitem" href="{{route('item-catagory')}}">Item Catagory</a>
-                        </li>
-
-                        <li >
-                            <a class="nav-subitem" href="#">Items</a>
-                        </li>
-
-                        <li >
-                            <a class="nav-subitem" href="#">Items</a>
-                        </li>
-
-                        <li >
-                            <a class="nav-subitem" href="#">Items</a>
-                        </li>
-                        
-                        
-                    </ul>
-                </li>
 
                 <li > 
                     <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
@@ -136,12 +119,116 @@
                     </a>
 
                     <ul class="nav-sublist d-none">
-                        <li class="nav-subitem">employee 2</li>
-                        <li class="nav-subitem">hello</li>
-                        <li class="nav-subitem">hello</li>
+                        <li >
+                            <a class="nav-subitem" href="{{route('employee.index')}}" >
+                                Employees
+                            </a>
+                        </li>
+
+                        <li >
+                            <a class="nav-subitem" href="{{route('designation.index')}}" >
+                              Desgination
+                            </a>
+                        </li>
+
+                        <li >
+                            <a class="nav-subitem" href="{{route('staff.index')}}" >
+                              Staff Group
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li > 
+                    <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
+                    <i class="fas fa-book-reader"></i>
+                        <span>Menu</span>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+
+                    <ul class="nav-sublist d-none">
+                        
+                        <li >
+                            <a class="nav-subitem" href="{{route('menuCatagory.index')}}">Catagories</a>
+                        </li>
+
+                        {{-- <li >
+                            <a class="nav-subitem" href="{{route('menuCatagory.create')}}">Create Catagory</a>
+                        </li> --}}
+
+                        <li >
+                            <a class="nav-subitem" href="{{route('products.all')}}">Products</a>
+                        </li>
+
+                        <li class="nav-subitem">Menu</li>
+    
+                    </ul>
+                </li>
+
+
+                <li > 
+                    <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
+                    <i class="fas fa-poll"></i>
+                        <span>Reports</span>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+
+                    <ul class="nav-sublist d-none">
+                        
+                        <li class="nav-subitem">reports</li>
                         
                     </ul>
                 </li>
+
+
+                <li > 
+                    <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
+                        <i class="fas fa-store"></i>
+                        <span>Store</span>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+
+                    <ul class="nav-sublist d-none">
+
+                        <li >
+                            <a class="nav-subitem" href="{{route('catagory.index')}}">catagories</a>
+                        </li>
+
+                        <li >
+                            <a class="nav-subitem" href="{{route('rawItem.all')}}">items</a>
+                        </li>
+
+                        <li >
+                            <a class="nav-subitem" href="{{ route('purchase.index')}}">purchases</a>
+                        </li>
+                        <li >
+                            <a class="nav-subitem" href="{{ route('vendor.index')}}">vendors</a>
+                        </li>
+
+                        
+                        
+                    </ul>
+                </li>
+
+                {{-- <li > 
+                    <a class="nav-dropdown" href="#"  data-toggle="tooltip" data-placement="top">
+                        <i class="fas fa-user-alt"></i>
+                        <span>Vendor</span>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+
+                    <ul class="nav-sublist d-none">
+                        <li >
+                            <a class="nav-subitem" href="{{route('vendor.index')}}">All Vendors</a>
+                        </li>
+
+                        <li >
+                            <a class="nav-subitem" href="{{route('vendor.newVendor')}}">New Vendor</a>
+                        </li>
+                        
+                    </ul>
+                </li> --}}
+               
 
             </ul>
 
@@ -149,10 +236,9 @@
 
         <div class="dashboard-content-area">
           
-            <main class="py-4">
+            <main >
                 @yield('content')
             </main>
-          
           
         </div>
 
@@ -173,57 +259,40 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                    
-                   <ul class="navbar-nav mr-auto">
-
-                    </ul> 
-
-                   
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
                         
-                       
+                        @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                        @endif
                     </ul>
                 </div>
             </div>
+            @endguest
         </nav>
 
         @guest
             <main class="py-1">
                 @yield('content')
             </main>
-            @endguest
-       
-    </div>
+            
+        </div>
+        @endguest
 
 
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/popper.min.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/dataTable/dataTable.min.js')}}"></script>
+
+    @yield('addJavaScript')
+
     <script src="{{asset('js/dashboard.js')}}"></script>
+
 </body>
 </html>

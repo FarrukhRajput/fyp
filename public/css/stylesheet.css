@@ -1,6 +1,8 @@
 
 
-body{
+
+html,body{
+    height: 100%;
     background: #f7f9fc;
     font-family: 'Nunito Sans', sans-serif;
 }
@@ -40,7 +42,7 @@ button:focus{
     display: inline-block;
     width: 230px;
     max-height: 80px;
-    background: #563d7c;
+    background: #1c77e6f7;
     transition: all 0.1s ease;
 }
 
@@ -67,8 +69,8 @@ button:focus{
     display: flex;
     flex: 1 auto;
     background: white;
-    box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
     max-height: 80px;
+    box-shadow: 5px 1px 6px 0px #0000009c;
 }
 
 .dashboard-nav{
@@ -125,7 +127,7 @@ button:focus{
     border-radius: 50%;
     margin: 0;
     padding: 0;
-    background: #563d7c;
+    background: #323f4f;
     box-shadow: 0 6 20px 0 rgba(0,0,0,.1);
     cursor: pointer;
     text-align: center;
@@ -200,13 +202,19 @@ button:focus{
 /****************************
     DASHBOARD SIDENAV
 ****************************/
-.dashboard-sidebar{
+
+.dashboard-container{
     position: relative;
+}
+
+.dashboard-sidebar{
+    position: absolute;
+    bottom: 0;
     display: block;
     float: left;
     width: 230px;
-    height: 100vh;
-    background: #563d7c;
+    height: 100%;
+    background: #1c77e6f7;
     transition: all .1s ease;
 }
 
@@ -228,7 +236,7 @@ button:focus{
 .nav-item:hover , 
 .nav-dropdown:hover,
 .nav-subitem:hover{
-    background: rgba(115, 83, 165, 0.5);
+    background: #232c38 ;
     box-shadow:  1px 2px 1px rgba(33, 37, 41, .15);
 }
 
@@ -262,7 +270,7 @@ button:focus{
 }
 
 .nav-sublist{
-    background: #422e61;
+    background:     #293442;
     color: white;
     padding: .5rem 0 .5rem;
     list-style: none;
@@ -317,14 +325,11 @@ button:focus{
 ===== DASHBOARD CONTENT AREA =====
 *********************************/
 
-
-
-
 .page-title{
     color: rgba(0, 0, 0, 0.6) !important;
     border-bottom: 1.5px solid #e3eaef;
     padding-bottom: 10px;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 
@@ -332,7 +337,10 @@ button:focus{
     height: 1rem;
 }
 
-
+.table-card{
+    height: 500px;
+    overflow-y: auto;
+}
 
 
 
@@ -342,6 +350,133 @@ button:focus{
     animation-fill-mode: both;
     backface-visibility: visible!important;
 }   
+
+
+.btn-theme{
+    color: white;
+    background-color: #232c38 !important;
+    border-color: #232c38!important;
+}
+
+.btn-theme:hover{
+    color: white;
+    background-color: #323f4f !important;
+    border-color: #323f4f !important;
+}
+
+
+/*************************
+===== GENERAL CLASS =====
+**************************/
+
+.employee-image-box{
+    position: relative;
+    
+}
+
+.employee-img{
+    position: absolute;
+    background-color: grey;
+    height: 100px;
+   
+}
+
+.message{
+    background-color: #38c172!important;
+    color:white;
+}
+
+.avatar-image{
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    box-shadow: 0px 5px 5px 1px #00000078;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.avatar-circle{
+    vertical-align: middle;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+}
+
+
+
+
+/* Avatar for image upload */
+
+
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    
+  }
+
+  .avatar-upload .avatar-edit {
+    position: absolute;
+    right: 12px;
+    z-index: 1;
+    top: 10px;
+  }
+
+
+  .avatar-upload .avatar-edit input {
+    display: none;
+  }
+
+  .avatar-upload .avatar-edit input + label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #ffffff;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+  }
+
+
+  .avatar-upload .avatar-edit input + label:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+  }
+
+  .avatar-upload .avatar-edit input + label:after {
+    content: "\1F4F7";
+    font-family: "FontAwesome";
+    color: #757575;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+  }
+
+  .avatar-upload .avatar-preview {
+    width: 192px;
+    height: 192px;
+    position: relative;
+    border-radius: 100%;
+    border: 6px solid #f8f8f8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatar-upload .avatar-preview > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
 
 
 

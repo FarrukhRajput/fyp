@@ -51,11 +51,26 @@ $(document).ready( () =>{
             }
         });
     });
-});
+},
+
+
+
+);
 
     // USER ICON PROFILE
     $(".user-icon").click( () => {
         $(".drop-down").toggleClass("d-block , flipInX");
     });
 
+
+
+
+
+ $('#unit_qty').keypress(
+     () => {
+        console.log('d') ;
+     }
+ )
+
+ 
 
