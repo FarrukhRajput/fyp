@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace restro;
 
-use App\RawItem;
+use restro\RawItem;
 
 use Illuminate\Database\Eloquent\Model;
 

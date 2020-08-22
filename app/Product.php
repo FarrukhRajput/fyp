@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace restro;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,8 +14,7 @@ class Product extends Model
     }
 
     public function parentCategory()
-    {
-        
-       return $this->belongsTo(MenuCategory::class ,  'id'); 
+    {   
+       return $this->belongsTo(MenuCategory::class ,  'menu_category_id'); 
     }
 }

@@ -5,7 +5,18 @@
 
     <h4 class="page-title">Products</h4>
 
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+       {{ session()->get('success')}}
+    </div>
+
+@endif
+
     <a href="{{route('products.create')}}" class="btn btn-primary">Create Product</a>
+
+
+  
+
 
     <div class="row mt-4">
         <div class="col-12">
@@ -16,12 +27,14 @@
                     </div>
                         
                 
-                        <table id="employeeTable" class="display table table-bordered">
+                        <table id="productTable" class="display table table-bordered">
                             <thead>
                                 <tr>
+                                    
                                     <th class="text-center">Title</th>
+                                    <th class="text-center">Image</th>
                                     <th class="text-center">MainCategory</th>
-                                    <th class="text-center">Sub Category</th>
+                                    {{-- <th class="text-center">Sub Category</th> --}}
                                     <th class="text-center">Price</th>
                                     <th class="text-center">Status</th>
                                    
@@ -33,23 +46,39 @@
                                 
                                 @foreach ($products as $product)
                                     <tr>
+                                       
                                         <td class="text-center">
-                                            {{$product->title}}
+                                            {{ucwords($product->title)}}
                                         </td>
+                                        <td class="text-center">
+                                            <img src="{{asset($product->image)}}" class="avatar-circle">
+                                        </td>
+                                        <td class="text-center">
+                                            {{ ucwords($product->parentCategory->title)}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{$product->price}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{  ucwords($product->is_active == 1 ? "active" : "de_active")}}
+                                        </td>
+                                        
 
                                        
                                         <td class="d-flex justify-content-center text-white " >
                                             <a
-                                                href="{{route('employee.show', ['id' => $product->name])}}"
+                                                href="{{route('products.edit', ['id' => $product->id])}}"
                                                 class="edit-btn btn btn-primary mr-3">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            {{-- <a
-                                                href="{{route('employee.destroy', [ 'id' => $employee->id ])}}" 
-                                                onclick="return confirm('Are you sure you want to delete &#034;{{ $employee->f_name.' '. $employee->l_name }}&#034; ?')"  
+                                            <a
+                                                href="{{route('products.destroy', [ 'id' => $product->id ])}}" 
+                                                onclick="return confirm('Are you sure you want to delete &#034;{{ $product->title }}&#034; ?')"  
                                                 class="btn btn-danger">
                                                 <i class="fas fa-trash-alt"></i>
-                                            </a> --}}
+                                            </a>
         
                                         </td>
                                     </tr>   
@@ -72,6 +101,9 @@
 @section('addJavaScript')
 
     <script>
+
+        $('#productTable').DataTable();
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -85,37 +117,40 @@
         }
 
 
-        $(document).ready(
 
-            () => {
-                $("#group").change(
-                    () => {
-                        var $id = $("#group option:selected").val();
-                        var $designation = $("#designation");
-                        $designation.removeAttr('disabled');
 
-                        $.ajax({
-                            type: 'GET',
-                            url: '/staff-group/getDesignation/' + $id,
-                            dataType: 'json',
-                            success: function (designations) {
 
-                                $designation.empty();
-                                $.each(designations, function (i, designation) {
-                                    $designation.append("<option value=" + designation.id +
-                                        ">" + designation.title + "</option>");
-                                });
-                            }
-                        })
-                    }
-                );
+        // $(document).ready(
 
-                $("#imageUpload").change(function () {
-                    readURL(this);
-                });
+        //     () => {
+        //         $("#group").change(
+        //             () => {
+        //                 var $id = $("#group option:selected").val();
+        //                 var $designation = $("#designation");
+        //                 $designation.removeAttr('disabled');
 
-            }
-        )
+        //                 $.ajax({
+        //                     type: 'GET',
+        //                     url: '/staff-group/getDesignation/' + $id,
+        //                     dataType: 'json',
+        //                     success: function (designations) {
+
+        //                         $designation.empty();
+        //                         $.each(designations, function (i, designation) {
+        //                             $designation.append("<option value=" + designation.id +
+        //                                 ">" + designation.title + "</option>");
+        //                         });
+        //                     }
+        //                 })
+        //             }
+        //         );
+
+        //         $("#imageUpload").change(function () {
+        //             readURL(this);
+        //         });
+
+        //     }
+        // )
 
     </script>
 

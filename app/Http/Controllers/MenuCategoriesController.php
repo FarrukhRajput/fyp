@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace restro\Http\Controllers;
 
-use App\MenuCategory;
+use restro\MenuCategory;
 use Illuminate\Http\Request;
 
 class MenuCategoriesController extends Controller
@@ -32,8 +32,10 @@ class MenuCategoriesController extends Controller
        
     }
 
-    public function store()
-    {
+    public function store(Request $request)
+    {   
+        dd($request->all());
+
         $category = new  MenuCategory();
         $category->title = request('title');
         $category->parent_category_id = request('parent_category_id');
@@ -63,6 +65,7 @@ class MenuCategoriesController extends Controller
     
     public function update($id)
     {   
+      
         $selectedParentId = MenuCategory::find(request('parent_category_id'));
         $category = MenuCategory::findOrFail($id);
   

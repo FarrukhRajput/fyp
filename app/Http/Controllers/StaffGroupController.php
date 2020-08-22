@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace restro\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
 
-use \App\Designation;
-use \App\StaffGroup;
+use \restro\Designation;
+use \restro\StaffGroup;
 
 class StaffGroupController extends Controller
 {
@@ -24,16 +24,20 @@ class StaffGroupController extends Controller
 
     public function store(Request $request){
 
+        $request->validate([
+            'title' => 'required'
+        ]);
+
         if($request->id){
             $this->update($request);
-            return back()->with('message' , 'Updated');
+            return back()->with('success' , 'Staff Group Updated Successfully');
         }
         
         else{
             $staffGroup = StaffGroup::create([
                 'title' =>  $request->title
             ]);    
-           return back()->with('message' , 'Staff Group Created Successfully' );
+           return back()->with('success' , 'Staff Group Created Successfully' );
         }
     }
 
@@ -88,9 +92,6 @@ class StaffGroupController extends Controller
     public function getDesignation($id)
     {
         $designations = Designation::where('group_id', $id)->get();
-        
-
-    
         return response()->json($designations);
     }
 

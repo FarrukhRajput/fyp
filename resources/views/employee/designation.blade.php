@@ -56,7 +56,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="" class="form-contol-label">Staff Group</label>
-                                <select name="group" id="" class="form-control" required>
+                                <select name="group" class="form-control" >
                                     <option disabled selected>None</option>
                                     @foreach ($group as $item )
                                         <option value="{{$item->id}}"  {{@$designation->group->id === $item->id? 'selected': ''  }} >{{$item->title}}</option>

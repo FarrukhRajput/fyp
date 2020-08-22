@@ -226,10 +226,6 @@ button:focus{
 }
 
 
-.nav-item:active{
-    background: red;
-}
-
 .nav-item, 
 .nav-dropdown {
     position: relative;
@@ -240,9 +236,9 @@ button:focus{
     backface-visibility: hidden;
 }
 
-.nav-item:hover , 
-.nav-dropdown:hover,
-.nav-subitem:hover{
+.dashboard-sidebar .nav-item:hover , 
+.dashboard-sidebar .nav-dropdown:hover,
+.dashboard-sidebar .nav-subitem:hover{
     background: #232c38 ;
     box-shadow:  1px 2px 1px rgba(33, 37, 41, .15);
 }
@@ -488,6 +484,29 @@ button:focus{
     background-position: center;
   }
   
+
+
+  .puchase-table thead tr th:first-child{
+    width: 10%;
+    text-align: center;
+}
+
+
+.puchase-table thead tr th:not(:first-child){
+
+    width: 12.5%;
+    text-align: center;
+}
+
+
+.puchase-table thead tr th:nth-child(2){
+    text-align: left;
+    width: 40%;
+}
+
+.puchase-table thead tr th:last-child{
+    min-width: 85px;
+}
 
 
 

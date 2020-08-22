@@ -24,14 +24,13 @@
 
                 <form action="{{ route('menuCatagory.store') }}" method="POST">
                     
-                    {{ csrf_field() }}
-                    
+                   @csrf                        
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="" class="form-contol-label">Parent Catagory</label>
                                 <select name="parent_category_id" class="form-control" required>
-                                    <option value="0">None</option>
+                                    <option value="0" disabled selected >None</option>
                                         @foreach ($categories as $item)   
                                             <option value="{{$item->id}}"  {{$item->id === @$category->parent_category_id ? 'selected': ''  }} >{{$item->title}}</option>
                                         @endforeach

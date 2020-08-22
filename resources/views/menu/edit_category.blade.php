@@ -30,9 +30,8 @@
 
                 <form  method="post" action="{{ route('menuCatagory.update' , [ 'id' => $category->id ]) }}">
                     
-                    {{ method_field('PATCH') }}
-                    {{ csrf_field() }}
-                    
+                    @csrf
+
                     <div class="row">
                     
                         <div class="col-3"> 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace restro\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use App\Vendor;
+use restro\Vendor;
 
 class VendorsController extends Controller
 {
@@ -38,10 +38,7 @@ class VendorsController extends Controller
     {
         $products = Vendor::find($id)->allProducts()->get();
 
-        return response()->json([
-            'message' => "success",
-            'data' => $products
-        ]);
+        return   $products;
     }
 
 

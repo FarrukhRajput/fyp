@@ -9,18 +9,20 @@
     <div class="col-4">
 
 
-        @if(session()->has('message'))
-            <div class="p-2 mb-2 message "> 
-                {{ session()->get('message') }}
+        @if(session()->has('success'))
+            <div class="p-2 mb-2 success "> 
+                {{ session()->get('success') }}
             </div>
         @endif
 
 
 
-        @if(session()->has('alert'))
-            <div class="p-2 mb-2 bg-danger text-white "> 
-                <p class="d-inline">{{ session()->get('alert') }}</p> 
-            </div>
+        @if(session()->has('errors'))
+           <ul>
+               @foreach ($errors as $error)
+                    <li>{{session()->get('error')}}</li>     
+               @endforeach
+           </ul>
         @endif
 
        
@@ -58,7 +60,7 @@
                         </div> --}}
                         <div class="col-12">
                             <label for="" class="form-contol-label">Title</label>
-                            <input name="title" value="{{@$group->title}}" type="text" class="form-control" placeholder="Staff Group">
+                            <input name="title" value="{{@$group->title}}" type="text" class="form-control" placeholder="Staff Group" required>
                         </div>
                     </div>
 
@@ -66,7 +68,7 @@
                 
                         <button class="btn btn-primary mr-3 w-100" type="submit">{{@$group->id? 'Update' : 'Create'}}</button>
                         @if(@$group->id)
-                            <a  href="{{route('staff.destroy' , [ 'group' => $group->id])}}"  onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$group->title}} &#034; ?')"  class="btn btn-danger w-100">
+                            <a href="{{route('staff.destroy' , [ 'group' => $group->id])}}"  onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$group->title}} &#034; ?')"  class="btn btn-danger w-100">
                                 Delete
                             </a>
                             @else 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace restro;
 
 use Illuminate\Database\Eloquent\Model;
 

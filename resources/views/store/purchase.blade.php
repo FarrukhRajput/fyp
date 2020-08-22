@@ -22,7 +22,7 @@
                 </div>
                     
                 <div class="table-card">
-                    <table id="vendorTable" class="table table-bordered">
+                    <table id="purchaseTable" class="table table-bordered">
                         <thead>
                             <tr>
                               
@@ -50,7 +50,7 @@
     
 <script>
 
-    $('#table').DataTable({
+    $('#purchaseTable').DataTable({
         paging:true,
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
     });

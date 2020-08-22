@@ -8,8 +8,19 @@
 
 <div class="row">
     <div class="col-4">
-        @if(session()->has('message'))
-        
+        @if(session()->has('errors'))
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li> <?= $error ?></li>
+                @endforeach 
+            </ul>
+        </div>
+
+        @elseif(session()->has('success'))
+            <div class="alert alert-success">
+                {{session()->get('success')}}
+            </div>
         @endif
 
         <div class="card">
@@ -22,6 +33,8 @@
 
                 <form method="POST" action="{{route('products.store')}}" enctype="multipart/form-data">
                     @csrf
+
+                    <input type="hidden" name="id" value="{{@$product->id}}">
                           
                     <div class="row">
 
@@ -32,7 +45,7 @@
                                     <label class="fa" for="imageUpload"></label>
                                 </div>
                                 <div class="avatar-preview">
-                                    <div id="imagePreview" style="background-image: url({{ @$employee->image ? asset(@$employee->image) :  asset('images/product-image.jpg')}});">
+                                    <div id="imagePreview" style="background-image: url({{ @$product->image ? asset(@$product->image) :  asset('images/product-image.jpg')}});">
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +56,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="" class="form-control-label">Title</label>
-                                <input name="title" type="text" class="form-control" required placeholder="Title">
+                                <input name="title" type="text" class="form-control" required placeholder="Title" value="{{@$product->title}}">
                             </div>
                         </div>
 
@@ -52,10 +65,10 @@
                             <div class="form-group">
                                 <label for="" class="form-contol-label">Menu Catagory</label>
                                 <select name="menu_category_id" class="form-control" required>
-                                    <option value="0">None</option>
+                                    <option  disabled selected>None</option>
                                     
                                     @foreach ($category as $item)
-                                        <option value="{{$item->id}}">{{$item->title}}</option>
+                                        <option value="{{$item->id}}"  {{@$product->menu_category_id == $item->id ? 'selected': ''  }} >{{ucwords($item->title) }}</option>
                                     @endforeach
                                         
                                 </select>
@@ -65,7 +78,7 @@
                        <div class="col-9">
                             <div class="form-group">
                                 <label for="" class="form-control-label">Price</label>
-                                <input name="price" type="number" class="form-control" min="1" required placeholder="Price">
+                                <input name="price" type="number" class="form-control" min="1" required placeholder="Price" value="{{@$product->price}}">
                             </div>
                         </div>
                         <div class="col-3">
@@ -73,7 +86,7 @@
           
                                 <label for="" class="form-control-label  d-block">IsActive</label>
                                     <label class="switch" for="status">
-                                        <input name="is_active" id="status" type="checkbox" }}> 
+                                        <input name="is_active" id="status" type="checkbox" {{@$product->is_active === 1 ? 'checked' :''}}> 
                                         <span class="slider round"></span>
                                 </label>
                             </div>
@@ -87,11 +100,6 @@
                         <button class="btn btn-danger w-100">Clear</button>
                     </div>
                 </form>
-
-
-              
-                
-
             </div>
         </div>
     </div>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace restro\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use \App\StaffGroup;
-use \App\Designation;
+use \restro\StaffGroup;
+use \restro\Designation;
 
 class DesignationController extends Controller
 {
@@ -41,9 +41,8 @@ class DesignationController extends Controller
             'title' => 'required'
         ]);
 
-       
-
         if(@$request->id){
+            dd($request->all());
             $this->update($request);
             return back()->with('message' , 'Desgination Updated Succesfully');
 

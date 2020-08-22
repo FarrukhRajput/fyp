@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace restro\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use App\StaffGroup;
-use App\Designation;
-use App\Employee;
+use restro\StaffGroup;
+use restro\Designation;
+use restro\Employee;
 
 class EmployeesController extends Controller
 {
@@ -182,6 +182,7 @@ class EmployeesController extends Controller
         }
         
         $employee->save();
+        return back()->with('success' , 'Employee updated Succesfully');
     }
 
 

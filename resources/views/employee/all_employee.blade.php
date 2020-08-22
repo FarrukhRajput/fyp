@@ -4,7 +4,15 @@
 
 @section('content')
 
+
 <h4 class="page-title">Employees</h4>
+
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success')}}
+            </div>
+
+        @endif
 
     <a href="{{route('employee.form')}}" class="btn btn-primary">Create Employee</a>
 

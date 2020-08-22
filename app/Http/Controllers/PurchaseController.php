@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace restro\Http\Controllers;
 
-use App\Vendor;
-use App\Purchase;
+use restro\Vendor;
+use restro\Purchase;
 use Illuminate\Http\Request;
 
 
@@ -46,7 +46,7 @@ class PurchaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Purchase  $purchase
+     * @param  \restro\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function show(Purchase $purchase)
@@ -57,7 +57,7 @@ class PurchaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Purchase  $purchase
+     * @param  \restro\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function edit(Purchase $purchase)
@@ -69,7 +69,7 @@ class PurchaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Purchase  $purchase
+     * @param  \restro\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Purchase $purchase)
@@ -80,7 +80,7 @@ class PurchaseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Purchase  $purchase
+     * @param  \restro\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function destroy(Purchase $purchase)

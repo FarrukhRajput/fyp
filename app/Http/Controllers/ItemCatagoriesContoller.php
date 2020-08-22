@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace restro\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\ItemCatagory;
+use restro\ItemCatagory;
 class ItemCatagoriesContoller extends Controller
 {   
 

@@ -83,6 +83,9 @@ Route::resource('/menu-categories', 'MenuCategoriesController')->names([
 Route::prefix('products')->group( function(){
     Route::get('/all' ,'ProductController@show')->name('products.all');
     Route::get('/create' ,'ProductController@create')->name('products.create');
+    Route::get('/edit/{id}' ,'ProductController@edit')->name('products.edit');
+    Route::get('/update/{id}' ,'ProductController@update')->name('products.update');
+    Route::get('/delete/{id}' ,'ProductController@destroy')->name('products.destroy');
     Route::post('/create' ,'ProductController@store')->name('products.store');
 });
 
@@ -93,7 +96,17 @@ Route::prefix('purchase')->group( function(){
     Route::get('/create' ,'PurchaseController@create')->name('purchase.create');
 });
 
-// // Products
+
+// Table
+
+Route::prefix('table')->group( function(){
+    // Route::get('/store' ,'TableController@store')->name('TableController.store');
+    Route::get('/all' ,'TableController@all')->name('table.all');
+   
+});
+
+
+
 // Route::resource('/products' , 'ProductController')->names([
 //     'create' => 'products.create',
 //     'store' =>  'products.store',
