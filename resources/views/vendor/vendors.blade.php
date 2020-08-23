@@ -11,13 +11,30 @@
 <h4 class="page-title">Vendors</h4>
 
 @if(session()->has('success'))
-        <div class="p-2 mb-2 message "> 
-    {{ session()->get('success') }}
-
+    <div class="p-2 mb-2 message "> 
+        {{ session()->get('success') }}
     </div>
+
+@elseif(session()->has('alert'))
+    <div class="p-2 mb-2 alert alert-danger "> 
+        {{ session()->get('alert') }}
+        <a class="force-btn" href="{{route('vendor.forceDelete', ['id' => session()->get('id') ])}}">Force Delete</a>
+    </div>
+
+
+@elseif(session()->has('errors'))
+
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <?= $error ?>
+            @endforeach
+        </ul>
+    </div>
+
 @endif
 
-<a href="{{route('vendor.create')}}" class="btn btn-theme mb-3">New Vendor   </a>
+<a href="{{route('vendor.create')}}" class="btn btn-theme mb-3"><i class="fas fa-plus mr-2"></i>New Vendor</a>
 <div class="row">
 
      <div class="col-12">

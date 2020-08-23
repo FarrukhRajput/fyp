@@ -14,57 +14,67 @@ class ItemCatagoriesContoller extends Controller
     }
 
     public function index(){
-        $catagories = ItemCatagory::all();
-        // dd($catagories);
-        return view('store.item_catagory',[ 'items' => $catagories ]);
+        $categories = ItemCatagory::all();
+        return view('store.item_catagory')->withCategories($categories);
     }
 
     public function store(Request $request){
-        $item_catagory = new ItemCatagory();
 
         $request->validate([
             'title' => 'required',        
         ]);
 
-        if(request('catagory_id')){
-            $catagory = ItemCatagory::find(request('catagory_id'));
+       
+        $item_catagory = new ItemCatagory(); 
+
+        if($request->id){
+            $catagory = ItemCatagory::find($request->id);
             $catagory->title = strtolower(request('title'));
-            $catagory->parent_catagory_id = request('parent_id');
             $catagory->save();
             return back()->with('success','Category updated successfully');
 
         }else{
             $item_catagory->title = request('title');
-            $item_catagory->parent_catagory_id = request('parent_id');
             $item_catagory->save();
             return back()->with('success','Category created successfully');
         }
     }
 
-    public function edit(ItemCatagory $catagory){
-        $catagories = ItemCatagory::with('parent')->get();
-        return view('store.item_catagory',['items'=>$catagories,'catagory'=>$catagory,'title' => 'Item Catagory' ,]);
+
+    public function edit($id){
+        $categories = ItemCatagory::all();    
+        $category = ItemCatagory::find($id);
+
+      
+        return view('store.item_catagory')->withCategories($categories)->withCategory($category);
     }
 
-    public function destroy(ItemCatagory $catagory)
+
+    public function destroy($id)
     {
+        $rawItem = ItemCatagory::find($id);
 
-        if($catagory->parent_catagory_id != 0){
-
-            $allSubCatagories = ItemCatagory::all()->where('parent_catagory_id', '==' , $catagory->id);
-
-            if( count($allSubCatagories) >= 1 ){
-                
-                foreach($allSubCatagories as $item){
-                    $item->parent_catagory_id = 1;       
-                    $item->save();
-                }  
-            }
-
-            $catagory->delete();
+        if(count($rawItem->getAllProducts) > 0){
+            return back()->with('id',$rawItem->id)->with('alert','Category contains raw items cannot deleted this category.'); 
         }
 
-        
+        $rawItem->delete();
         return back()->with('error','Category deleted successfully');
+    }
+
+
+    public function forceDelete($id)
+    {
+        $rawItem = ItemCatagory::find($id);
+        
+        foreach($rawItem->getAllProducts as $item){
+           $item->delete();
+        }
+
+        $rawItem->delete();
+        
+        return back()->with('success' , 'Deleted all related raw items for this group');
+
+        
     }
 }

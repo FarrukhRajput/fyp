@@ -14,101 +14,85 @@ class MenuCategoriesController extends Controller
 
     public function index()
     {
-        $categories = MenuCategory::with(['parent'])->get();
+        // $categories = MenuCategory::with(['parent'])->get();
+        $categories = MenuCategory::all();
 
-        return view('menu.all_categories' , [
-            'categories' => $categories
-        ]);
-    }
+        // dd($categories);
 
-
-    public function create()
-    {
-        $categories = MenuCategory::with(['parent'])->get();
-        
+        // dd($categories);
         return view('menu.category' , [
             'categories' => $categories
         ]);
-       
     }
+
 
     public function store(Request $request)
     {   
-
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
         ]);
-
-
+           
         
-        $category = new  MenuCategory();
-        $category->title = $request->title;
-        if($request->parent_category_id){
-            $category->parent_category_id = $request->parent_category_id;  
+        if($request->id){
+            $this->update($request);
+            return back()->with('success' , 'Menu Category Updated Succesfully');
         }
 
-        $category->parent_category_id = 1;
+        $category = new  MenuCategory();
+        $category->title = $request->title;
         $category->save();
 
-        return back()->with('message', 'Category Created Sucessfully');
+        return back()->with('success', 'Menu Category Created Sucessfully');
     }
 
- 
-    public function show()
-    {
-        
-    }
 
    
     public function edit($id)
     {
-        $categories = MenuCategory::with(['parent'])->get();
+        $categories = MenuCategory::all();
         $category = MenuCategory::findOrFail($id);
 
-        return view('menu.edit_category',[
+        return view('menu.category',[
             'category' => $category,
             'categories' => $categories
         ]);
     }
 
     
-    public function update($id)
+    public function update($request)
     {   
-      
-        $selectedParentId = MenuCategory::find(request('parent_category_id'));
-        $category = MenuCategory::findOrFail($id);
-  
-        if($category->id == request('parent_category_id')){
-           return back()->with( 'error' , "Category cannot be the parent of itself");
-        }
-        
-        else if( request('parent_category_id') != 0  ){
-
-            if($category->id ==  $selectedParentId->parent_category_id){
-                return back()->with( 'error' , "One Category Is Already The Parent Of Other Category");
-            }
-            
-            else{
-                $category->title = request('title');
-                $category->parent_category_id = request('parent_category_id');
-                $category->save();
-        
-                return view('menu.all_categories')->with('message' , 'Category Updated Successfully');
-            }
-        }
+    
+        $category = MenuCategory::findOrFail($request->id);
+        $category->update($request->all());
     }
 
 
     public function destroy($id)
     {
-        $parentCategory = MenuCategory::where('parent_category_id', $id)->count();
-
-        if($parentCategory > 0){
-            return  back()->with('delete' , 'Cannot Delete Parent Category');
-        }
+        
         $category = MenuCategory::find($id);
-        $category->delete();
-        return redirect()->route('menuCatagory.index')->with('delete' , 'Category Deleted Successfully');
+
+        if($category->getMenuProducts->count() == 0){
+            $category->delete();
+            return back()->with('success','Menu Category Deleted Successfully.');
+        }
+
+        else{
+            return back()->with('id', $category->id)->with('alert', '" '.ucwords($category->title).' " contains some products, Please, delete all its Products before deleting it.');
+        }
     }   
+
+    public function forceDelete($id)
+    {
+        $group = MenuCategory::find($id);
+
+        foreach ($group->getMenuProducts as $item) {
+            $item->delete();
+        }
+
+        $group->delete();
+        return redirect()->route('menuCatagory.index')->with('success' , 'Deleted all products related to this menu category');
+       
+    }
     
 }

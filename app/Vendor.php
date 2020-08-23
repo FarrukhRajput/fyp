@@ -13,9 +13,10 @@ class Vendor extends Model
     ];
 
 
-    public function allProducts()
+
+    public function getAllProducts()
     {
-        return $this->hasMany(RawItem::class, 'vendor_id');
+        return $this->hasMany(RawItem::class,'vendor_id');
     }
 
 }

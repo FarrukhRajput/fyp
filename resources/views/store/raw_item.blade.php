@@ -5,11 +5,8 @@
 
 <h4 class="page-title">Store Items</h4>
 
-@if(@$item->id)
-<a href="{{route('rawItem.index')}}" class="btn btn-theme mb-3">Create Store Item</a>
-    @else
-    <a href="{{route('rawItem.all')}}" class="btn btn-theme mb-3">All Raw Items</a>
-@endif
+<a href="{{route('rawItem.all')}}" class="btn btn-theme mb-3"> <i class="fas fa-arrow-left"></i> All Raw Items</a>
+
 <div class="row">
    
     <div class="col-5">

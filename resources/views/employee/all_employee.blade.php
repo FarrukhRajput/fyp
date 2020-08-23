@@ -14,7 +14,7 @@
 
         @endif
 
-    <a href="{{route('employee.create')}}" class="btn btn-primary">Create Employee</a>
+    <a href="{{route('employee.create')}}" class="btn btn-primary"><i class="fas fa-plus mr-2"></i>Create Employee</a>
 
     <div class="row mt-4">
         <div class="col-12">

@@ -10,8 +10,9 @@
     $year = date('Y');
     $today = $year . '-' . $month . '-' . $day;
 ?>
+<h4 class="page-title">Employees</h4>
 
-<a href="{{route('employee.index')}}" class="btn btn-theme mb-3">All Employees</a>
+<a href="{{route('employee.index')}}" class="btn btn-theme mb-3"> <i class="fas fa-arrow-left"></i> All Employees</a>
 
     <div class="row ">
         <div class="col-8">

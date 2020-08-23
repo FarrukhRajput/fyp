@@ -5,14 +5,21 @@
 
 
 
-<a href="{{route('vendor.index')}}" class="btn btn-theme mb-3">All Purchase</a>
+<h4 class="page-title">Vendors</h4>
+<a href="{{route('vendor.index')}}" class="btn btn-theme mb-3"><i class="fas fa-arrow-left"></i> All Purchase</a>
 
 
 <div class="row">   
     <div class="col-5">
         @if(session()->has('success'))
-            <div class="p-2 mb-2 message "> 
+            <div class="p-2 mb-2 alert alert-success "> 
                 {{ session()->get('success') }}
+            </div>
+
+        @elseif(session()->has('alert'))
+            <div class="p-2 mb-2 alert alert-danger "> 
+                {{ session()->get('alert') }}
+                <a class="force-btn" href="{{route('vendor.forceDelete', ['id' => session()->get('id') ])}}">Force Delete</a>
             </div>
 
         @elseif(session()->has('errors'))
@@ -34,7 +41,7 @@
 
         <form action="{{route('vendor.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="vendor_id" value="{{@$vendor->id}}">
+            <input type="hidden" name="id" value="{{@$vendor->id}}">
             
             <div class="form-group">
                 <label for="" class="form-label">Company Name</label>
@@ -62,13 +69,13 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="" class="form-label">Cnic</label>
-                        <input required name="cnic" type="text" class="form-control" placeholder="XXXXX-XXXXXXX-X" value="{{@$vendor->cnic}}">
+                        <input required name="cnic" type="text" class="form-control" pattern="^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$" placeholder="XXXXX-XXXXXXX-X" value="{{@$vendor->cnic}}">
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="" class="form-label">Phone</label>
-                        <input required name="phone" type="text" class="form-control" placeholder="Phone #" value="{{@$vendor->phone}}">
+                        <input  name="phone" pattern="^[0-9+]{4}-[0-9+]{7}$"   type="text" class="form-control" placeholder="03xx-xxxxxx" value="{{@$vendor->phone}}" required>
                     </div>
                 </div>
             </div>

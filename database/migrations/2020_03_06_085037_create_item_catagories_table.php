@@ -16,7 +16,6 @@ class CreateItemCatagoriesTable extends Migration
         Schema::create('item_catagories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->integer('parent_catagory_id')->default('0');
             $table->timestamps();
         });
     }

@@ -2,15 +2,18 @@
 
 namespace restro;
 
+use restro\RawItem;
 use Illuminate\Database\Eloquent\Model;
+
 
 class ItemCatagory extends Model
 {
     // protected $table = 'item_catagories' ;
 
-    public function parent()
+
+    public function getAllProducts()
     {
-        return $this->belongsTo(static::class,'parent_catagory_id');
+        return $this->hasMany(RawItem::class,'catagory_id');
     }
 
 }

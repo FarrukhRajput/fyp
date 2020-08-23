@@ -13,7 +13,7 @@
 <a href="{{route('purchase.create')}}" class="btn btn-theme mb-3"> <i class="fas fa-plus mr-2"></i>Add Purchase</a>
 <div class="row">
 
-     <div class="col-12">
+     <div class="col-10">
         <div class="card">
 
             <div class="card-body ">

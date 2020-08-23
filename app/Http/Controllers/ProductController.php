@@ -42,6 +42,8 @@ class ProductController extends Controller
         ]);
 
 
+        // dd($request->all());
+
         if(@$request->id){
             $this->update($request);
             return back()->with('success' , 'Product Updated Succesfully');

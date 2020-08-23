@@ -9,15 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 class MenuCategory extends Model
 {
     protected $table = 'menu_catagories';
+    protected $fillable = [ 'title' ];
 
-    public function products()
+
+    public function getMenuProducts()
     {
-        return $this->hasMany(Product::class , 'menu_category_id');
+        return $this->hasMany(Product::class, 'menu_category_id');
     }
 
-
-    public function parent()
-    {   
-        return $this->belongsTo(static::class , 'parent_category_id');
-    }
 }

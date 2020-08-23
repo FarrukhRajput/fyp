@@ -16,7 +16,6 @@ class CreateMenuCatagoriesTable extends Migration
         Schema::create('menu_catagories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->integer('parent_category_id')->default('0');
             $table->timestamps();
         });
     }

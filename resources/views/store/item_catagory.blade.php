@@ -10,25 +10,26 @@
 
 <h4 class="page-title">Item Catagory</h4>
 
-
-
-
 <div class="row">
     <div class="col-4">
-        @if (session()->has('errors'))
-            <div class=" alert alert-danger  p-2 mb-2">
+       
+        @if (session()->has('success')) 
+            <div class=" alert alert-success  p-2 mb-2">
+                <li>{{ session()->get('success') }}</li>
+            </div>
+
+        @elseif(session()->has('alert'))
+            <div class="p-2 mb-2 alert alert-danger "> 
+                {{ session()->get('alert') }}
+                <a class="force-btn" href="{{route('category.forceDelete', ['id' => session()->get('id') ])}}">Force Delete</a>
+            </div>     
+
+        @elseif (session()->has('errors'))
+            <div class=" alert alert-danger p-2 mb-2">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </div>  
-            
-        @elseif (session()->has('success')) 
-            <div class=" alert alert-success  p-2 mb-2">
-               
-                <li>{{ session()->get('success') }}</li>
-               
-            </div>     
-
         @endif
 
 
@@ -38,34 +39,27 @@
 
                 <div class="card-titl d-flex justify-content-between"> 
                     <h5 class="d-inline-block">New Catagory</h5>
-                    @if(@$catagory->id)
-                        <a href="{{route('catagory.index')}}" class="btn btn-theme d-inline-block">Create <i class="fas fa-plus"></i> </a>
+                    @if(@$category->id)
+                        <a href="{{route('category.index')}}" class="btn btn-theme d-inline-block">Create <i class="fas fa-plus"></i> </a>
                     @endif
                 </div>
 
-                <form action="{{route('catagory.store')}}" method="post">
+                <form action="{{route('category.store')}}" method="POST">
                     @csrf
-                    <input type="hidden" name="catagory_id" value="{{@$catagory->id}}">
+
+                    <input type="hidden" name="id" value="{{@$category->id}}">
 
                     <div class="form-group">
                         <label for="" class="form-label">Catagory Title</label>
-                        <input name="title" type="text" class="form-control" value="{{@$catagory->title}}" placeholder="Catagory..">
+                        <input name="title" type="text" class="form-control" value="{{ucwords(@$category->title)}}" placeholder="Catagory..">
                     </div>
 
-                    <div class="form-group">
-                        <label for="parentCatagory">Choose Parent Catagory</label>
-                        <select name="parent_id" class="form-control" id="parentCatagory">
-                       
-                            @foreach($items as $item)
-                                <option value="{{$item->id}}" {{@$catagory->parent->id==$item->id?'selected':''}}>{{ucwords($item->title)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="form-group d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary mr-3">{{@$catagory->id ?  'Update': 'Create' }}</button>
-                        @if(@$catagory->id)
-                            <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$catagory->title}} &#034; ?')" href="{{route('catagory.delete' ,['vendor' => $catagory->id] )}}" class="btn btn-danger">Delete</a>
+                        <button type="submit" class="btn btn-primary mr-3">{{@$category->id ?  'Update': 'Create' }}</button>
+                        @if(@$category->id)
+                            <a onclick="return confirm('Are you sure you Delete &#034; {{ ucwords($category->title)}} &#034; category ?')" 
+                                href="{{route('category.delete' ,['vendor' => $category->id] )}}" class="btn btn-danger">Delete</a>
                         
                         @else
                           <button type="reset" class="btn btn-danger">Clear</button>
@@ -77,11 +71,11 @@
         </div>
     </div>
 
-     <div class="offset-1 col-7">
+     <div class="offset-3 col-5">
         <div class="card">
             <div class="card-body ">
                 <div class="card-title "> 
-                    <h5>All Catagories</h5>
+                    <h5>Manage Catagories</h5>
                 </div>
                     
                 
@@ -89,46 +83,30 @@
                         <thead>
                             <tr>
                                 <th class="text-center"># </th>
-                                <th class="text-center">Catagory Name</th>
-                                <th class="text-center">Parent Catagory</th>
+                                <th class="text-center">Title</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             
-                            @foreach ($items as $catagory)    
+                            @foreach ($categories as $category)    
                             <tr>
-                                <th class="text-center">{{ $catagory ->id }}</th>
-                                <td class="text-center">{{ ucwords($catagory ->title) }}</td>
-                                <td class="text-center">
-                                    @if(!$catagory->parent)
-                                      -
-                                    @else
-                                        {{ ucwords($catagory->parent->title) }}
-                                    @endif    
-                                </td>
-                                @if ($catagory->id != 1 )
-                                    <td class="d-flex justify-content-center" >
-                                        <a href="{{route('catagory.edit', [ 'catagory' => $catagory ->id ])}}" class="btn btn-primary mr-3">
-                                        <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{ ucwords($catagory->title)}} &#034; ?')" href="{{route('catagory.delete', [ 'catagory' => $catagory -> id ])}}" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
-                                
-                                @else
+                                <th class="text-center">{{ $category->id }}</th>
+                                <td class="text-center">{{ ucwords($category ->title) }}</td>
+                             
+                            
                                     <td class="d-flex justify-content-center" >
                                         
-                                        <a onclick="return confirm('Cannot Edit &#034; {{ ucwords($catagory->title)}} &#034; ?')" href="#" class="btn btn-primary mr-3">
+                                        <a href="{{ route('category.edit' , ['id' => $category->id])}}" class="btn btn-primary mr-3">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a onclick="return confirm('Cannot Delete &#034; {{ ucwords($catagory->title)}} &#034; ?')" href="#" class="btn btn-danger">
+                                        <a onclick="return confirm('Are you sure you Delete &#034; {{ ucwords($category->title)}} &#034; category ?')" 
+                                            href="{{route('category.delete' ,['vendor' => $category->id] )}}" class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
-                                @endif
+                        
                             </tr>
                             @endforeach
                         </tbody>

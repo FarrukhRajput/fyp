@@ -46,13 +46,53 @@ Route::prefix('employees')->group( function() {
     Route::get('/{id}/destroy','EmployeesController@destroy')->name('employee.destroy');
 });
 
+// Menu
+Route::prefix('/menu')->group( function () {
+    // Menu Catagories
+    Route::get('/category/all' ,'MenuCategoriesController@index')->name('menuCatagory.index');
+    Route::post('/category/all' ,'MenuCategoriesController@store')->name('menuCatagory.store');
+    Route::get('/category/{id}/edit' ,'MenuCategoriesController@edit')->name('menuCatagory.edit');
+    Route::get('/category/{id}/destroy' ,'MenuCategoriesController@destroy')->name('menuCatagory.destroy');
+    Route::get('/category/{id}/force-delete' ,'MenuCategoriesController@forceDelete')->name('menuCatagory.forceDelete');
 
 
-// Item Catagories
-Route::get('/item-catagory', 'ItemCatagoriesContoller@index')->name('catagory.index');
-Route::post('/item-catagory', 'ItemCatagoriesContoller@store')->name('catagory.store');
-Route::get('/item-catagory/{catagory}/delete', 'ItemCatagoriesContoller@destroy')->name('catagory.delete');
-Route::get('/item-catagory/{catagory}/edit', 'ItemCatagoriesContoller@edit')->name('catagory.edit');
+     // Menu/Product routes
+     Route::get('/product/all' ,'ProductController@show')->name('products.all');
+     Route::get('/product/create' ,'ProductController@create')->name('products.create');
+     Route::post('/product/create' ,'ProductController@store')->name('products.store');
+     Route::get('/product/edit/{id}' ,'ProductController@edit')->name('products.edit');
+     Route::get('/product/update/{id}' ,'ProductController@update')->name('products.update');
+     Route::get('/product/delete/{id}' ,'ProductController@destroy')->name('products.destroy');
+});
+
+
+
+// store
+Route::prefix('/store')->group( function ()
+{
+    //store Catagories
+    Route::get('/item-category/all', 'ItemCatagoriesContoller@index')->name('category.index');
+    Route::post('/item-category', 'ItemCatagoriesContoller@store')->name('category.store');
+    Route::get('/item-category/{id}/edit', 'ItemCatagoriesContoller@edit')->name('category.edit');
+    Route::get('/item-category/{id}/delete', 'ItemCatagoriesContoller@destroy')->name('category.delete');
+    Route::get('/item-category/{id}/force-delete', 'ItemCatagoriesContoller@forceDelete')->name('category.forceDelete');
+   
+});
+
+
+
+// Route::resource('/menu-categories', 'MenuCategoriesController')->names([
+//     // 'index' => 'menuCatagory.index',
+//     'store' => 'menuCatagory.store',
+//     // 'create' => 'menuCatagory.create',
+//     'update' => 'menuCatagory.update',
+//     // 'destroy' => 'menuCatagory.destroy'
+// ]);
+
+
+
+
+
 
 // Raw items
 Route::get('/raw-item' ,'RawItemController@index')->name('rawItem.index');
@@ -64,10 +104,11 @@ Route::get('/raw-item/{rawitem}/delete' ,'RawItemController@destroy')->name('raw
 
 
 // Vendors
-Route::prefix('/vendor')->group( function(){
+Route::prefix('/vendor')->group( function() {
     Route::get('/all' ,'VendorsController@index')->name('vendor.index');
     Route::get('/{vendor}/edit','VendorsController@edit')->name('vendor.edit');
     Route::get('/{vendor}/delete','VendorsController@destroy')->name('vendor.delete');
+    Route::get('/{vendor}/force-delete','VendorsController@forceDelete')->name('vendor.forceDelete');
     Route::get('/create','VendorsController@create')->name('vendor.create');
     Route::post('/create' ,'VendorsController@store')->name('vendor.store');
     Route::get('/{id}/allProducts' , 'VendorsController@allVendorProducts')->name('vendor.allVendorProducts');
@@ -88,15 +129,6 @@ Route::prefix('/vendor')->group( function(){
 
 
 
-// Menu Catagories
-Route::resource('/menu-categories', 'MenuCategoriesController')->names([
-    'index' => 'menuCatagory.index',
-    'store' => 'menuCatagory.store',
-    'create' => 'menuCatagory.create',
-    'edit' => 'menuCatagory.edit',
-    'update' => 'menuCatagory.update',
-    'destroy' => 'menuCatagory.destroy'
-]);
 
 
 

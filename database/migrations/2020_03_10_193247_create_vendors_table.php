@@ -19,7 +19,7 @@ class CreateVendorsTable extends Migration
             $table->string('f_name');
             $table->string('l_name');
             $table->string('phone');
-            $table->string('cnic');
+            $table->string('cnic')->unique();
             $table->timestamps();
         });
     }

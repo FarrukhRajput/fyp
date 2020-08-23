@@ -4,7 +4,7 @@
 @section('content')
 
     <h4 class="page-title">Products</h4>
-    <a class="btn btn-theme mb-3" href="{{ route('products.all') }}" >All Products</a>
+    <a class="btn btn-theme mb-3 " href="{{ route('products.all') }}" > <i class="fas fa-arrow-left"></i> All Products</a>
 
 <div class="row">
     <div class="col-4">
@@ -96,8 +96,20 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mr-3 w-100">Create</button>
-                        <button class="btn btn-danger w-100">Clear</button>
+                        
+                        <button type="submit" class="btn btn-primary mr-3 w-100">{{ @$product->id ?'Update' : 'Create'}}</button>
+                        
+                        
+                        @if(@$product->id )
+                            <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$product->title}} &#034; ?')" href="{{route('products.destroy', [ 'id' => $product ->id ])}}" class="btn btn-danger w-100">
+                                Delete
+                            </a>
+
+                        @else
+                            <button class="btn btn-danger w-100" type="reset">Clear</button>
+
+                        @endif
+
                     </div>
                 </form>
             </div>

@@ -3,6 +3,9 @@
 
 @section('content')
 
+<h4 class="page-title">Purchase</h4>
+<a href="{{route('purchase.index')}}" class="btn btn-theme mb-3"> <i class="fas fa-arrow-left"></i>  All Purchase</a>
+
 <div class="row">   
     <div class="col-10">
         @if(session()->has('success'))
@@ -24,8 +27,7 @@
 
             <div class="card-header active d-flex justify-content-between">
                 <h5 class="text-light mt-2">Add Purchase</h5>
-                <a href="{{route('purchase.index')}}" class="btn btn-theme">All Purchase</a>
-
+               
             </div>
 
             <div class="card-body">

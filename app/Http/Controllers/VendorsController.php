@@ -38,7 +38,7 @@ class VendorsController extends Controller
     {
         $products = Vendor::find($id)->allProducts()->get();
 
-        return   $products;
+        return  $products;
     }
 
 
@@ -59,7 +59,18 @@ class VendorsController extends Controller
             'cnic' => 'required'
         ]);
 
-        if( !request('vendor_id') ){
+        if($request->id){
+
+            $vendor = Vendor::find($request->id);
+            $vendor->update($request->all());
+            return back()->with('success' , ucwords('Vendor Details Updated Successfully')); 
+
+        } else {
+
+            $request->validate([
+                'cnic' => 'required|unique:vendors,cnic'
+            ]);
+
             $vendor = Vendor::create([
                 'company_name'  => request('company_name'),
                 'f_name' => request('f_name'),
@@ -68,33 +79,43 @@ class VendorsController extends Controller
                 'cnic' => request('cnic'),
             ]);
 
-            return back()->with('message', ucwords('Vendor Created Successfully'));
+            return back()->with('success', ucwords('Vendor Created Successfully'));
 
-        } else {
 
-            $vendor = Vendor::find(request('vendor_id'));
-            $vendor->update($request->all());
-
-            return redirect()->route('vendor.index')->with('success' , ucwords('Vendor Details Updated Successfully')); 
+            
 
         }
 
      
     }
 
-    public function destroy($id )
+    public function destroy($id)
     {       
-        $vendor = Vendor::find($id) ;
-        $imagePath = public_path('images/vendors'.$vendor->image);
+        $vendor = Vendor::find($id);
+        if($vendor->with('getAllProducts')->get()->count() > 0 ){
+           return back()->with('id',$vendor->id)->with('alert' , '" '.ucwords($vendor->f_name).' " contains raw items cannot deleted this vendor.Delete all raw items register against this user.' ) ; 
+        }
+        $vendor->delete();
+        return redirect()->route('vendor.index')->with('message', "Vendor Deleted Successfully");
+    }
 
 
-        if(\File::exists($imagePath)){
-            \File::delete($imagePath);
+    public function forceDelete($id)
+    {
+       
+        $vendor = Vendor::find($id);
+        $name = $vendor->f_name.''.$vendor->l_name;
+
+        foreach($vendor->with('getAllProducts')->get() as $item){
+            $item->delete();
         }
 
         $vendor->delete();
-        return redirect()->route('vendor.index')->with('message', "Vendor Deleted Successfully");
 
+        return redirect()->route('vendor.index')->with('success' , 'Deleted all raw items related to '.$name);
+
+
+        
     }
 
 

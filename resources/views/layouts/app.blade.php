@@ -154,14 +154,14 @@
                                 <li>
                                     <a class="nav-subitem" href="{{route('menuCatagory.index')}}">Catagories</a>
                                 </li>
-                        <li>
-                            <a class="nav-subitem" href="{{route('products.all')}}">Products</a>
-                        </li>
+                                <li>
 
-                        <li> <a href="#" class="nav-subitem">Menu</a></li>
+                                    <a class="nav-subitem" href="{{route('products.all')}}">Products</a>
+                                </li>
+
+                        {{-- <li> <a href="#" class="nav-subitem">Menu</a></li> --}}
 
                     </ul>
-
 
                     <li>
                         <a class="nav-dropdown" href="#" data-toggle="tooltip" data-placement="top">
@@ -186,7 +186,7 @@
                         <ul class="nav-sublist d-none">
 
                             <li>
-                                <a class="nav-subitem" href="{{route('catagory.index')}}">catagories</a>
+                                <a class="nav-subitem" href="{{route('category.index')}}">catagories</a>
                             </li>
 
                             <li>
@@ -196,11 +196,6 @@
                             <li>
                                 <a class="nav-subitem" href="{{ route('purchase.index')}}">purchases</a>
                             </li>
-                            <li>
-                                <a class="nav-subitem" href="{{ route('vendor.index')}}">vendors</a>
-                            </li>
-
-
 
                         </ul>
                     </li>
@@ -221,12 +216,26 @@
                                 <a class="nav-subitem" href="#">Users</a>
                             </li>
 
-                            
-
-
-
                         </ul>
                     </li>
+
+
+                    <li>
+                        <a class="nav-dropdown" href="#" data-toggle="tooltip" data-placement="top">
+                            <i class="fas fa-book-reader"></i>
+                            <span>Vendors</span>
+                            <i class="fas fa-chevron-right arrow"></i>
+                        </a>
+
+                        <ul class="nav-sublist d-none">
+                            <li>
+                                <a href="{{route('vendor.create')}}" class="nav-subitem">create vendor </a>
+                            </li>
+
+                            <li> <a href="{{route('vendor.index')}}" class="nav-subitem">view vendors </a></li>
+                        </ul>
+                    </li>
+                    
 
                 </div>
 

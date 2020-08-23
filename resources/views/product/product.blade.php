@@ -6,16 +6,13 @@
     <h4 class="page-title">Products</h4>
 
     @if(session()->has('success'))
-    <div class="alert alert-success">
-       {{ session()->get('success')}}
-    </div>
+        <div class="alert alert-success">
+        {{ session()->get('success')}}
+        </div>
 
-@endif
+    @endif
 
-    <a href="{{route('products.create')}}" class="btn btn-primary">Create Product</a>
-
-
-  
+    <a href="{{route('products.create')}}" class="btn btn-primary"> <i class="fas fa-plus mr-2"></i>Create Product</a>
 
 
     <div class="row mt-4">
