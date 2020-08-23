@@ -14,7 +14,7 @@
 
         @endif
 
-    <a href="{{route('employee.form')}}" class="btn btn-primary">Create Employee</a>
+    <a href="{{route('employee.create')}}" class="btn btn-primary">Create Employee</a>
 
     <div class="row mt-4">
         <div class="col-12">
@@ -68,7 +68,7 @@
                                         </td>
                                         <td class="d-flex justify-content-center text-white " >
                                             <a
-                                                href="{{route('employee.show', ['id' => $employee->id])}}"
+                                                href="{{route('employee.edit', ['id' => $employee->id])}}"
                                                 class="edit-btn btn btn-primary mr-3">
                                                 <i class="fas fa-edit"></i>
                                             </a>

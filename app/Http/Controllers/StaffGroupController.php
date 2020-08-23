@@ -14,13 +14,17 @@ class StaffGroupController extends Controller
         $this->middleware('auth');
     }
 
+
+
     public function index(){
         $allGroups = StaffGroup::all();
-    
+        
         return view('employee.staff' , [
             'groups' =>  $allGroups  
         ]); 
     }
+
+
 
     public function store(Request $request){
 
@@ -28,11 +32,14 @@ class StaffGroupController extends Controller
             'title' => 'required'
         ]);
 
+
+        // Update's the staff group  
         if($request->id){
             $this->update($request);
-            return back()->with('success' , 'Staff Group Updated Successfully');
+            return back()->with('success' , 'Staff Group Updated Successfully' );
         }
         
+        // store's the staff group  
         else{
             $staffGroup = StaffGroup::create([
                 'title' =>  $request->title
@@ -42,7 +49,7 @@ class StaffGroupController extends Controller
     }
 
 
-    public function show($id){
+    public function edit($id){
         $group = StaffGroup::find($id);
         $groups = StaffGroup::all();
 
@@ -52,12 +59,21 @@ class StaffGroupController extends Controller
         ]);
     }
 
+
+
     public function update($request)
     {   
-        $group = StaffGroup::find($request->id);
+
+        $request->validate([
+            'title' => 'required'
+        ]);
+
+        $group = StaffGroup::findorfail($request->id);
         $group->title = $request->title;
         $group->save();
     }
+
+
 
     public function destroy($id)
     {       
@@ -67,31 +83,30 @@ class StaffGroupController extends Controller
         if( $group->designations->count() == 0){
             $group =  StaffGroup::find($id);
             $group->delete();
-            return redirect()->route('staff.index')->with('message' , 'Deleted');
+            return back()->with('success' , 'Staff Group Deleted Successfully');
         }else{
-            return redirect()
-            ->route('staff.show' , [
-                'group' => $group,
-                'groups' => $groups ])
-            ->with('alert', 'Group Contains Some Desginations, Delete Related Designations First..');
+            return back()->with('id', $group->id)->with('alert', 'Staff Group contains some desginations, Please, delete all Designations related to "'.$group->title .'".');
         }
         
     }
 
    public function forceDelete($id)
     {
+
         $group = StaffGroup::find($id);
 
         foreach ($group->designations as $designation) {
             $designation->delete();
         }
-        return redirect()->route('staff.index')->with('message' , 'Deleted all desgination related to group');
+
+        $group->delete();
+        return redirect()->route('staff.index')->with('success' , 'Deleted all desgination related to group');
     }
 
 
-    public function getDesignation($id)
+    public function getDesignations($id)
     {
-        $designations = Designation::where('group_id', $id)->get();
+        $designations = Designation::where('staff_group_id', $id)->get();
         return response()->json($designations);
     }
 

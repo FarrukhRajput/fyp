@@ -34,11 +34,20 @@ class MenuCategoriesController extends Controller
 
     public function store(Request $request)
     {   
-        dd($request->all());
 
+        $request->validate([
+            'title' => 'required'
+        ]);
+
+
+        
         $category = new  MenuCategory();
-        $category->title = request('title');
-        $category->parent_category_id = request('parent_category_id');
+        $category->title = $request->title;
+        if($request->parent_category_id){
+            $category->parent_category_id = $request->parent_category_id;  
+        }
+
+        $category->parent_category_id = 1;
         $category->save();
 
         return back()->with('message', 'Category Created Sucessfully');

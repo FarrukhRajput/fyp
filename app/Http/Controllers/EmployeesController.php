@@ -21,17 +21,13 @@ class EmployeesController extends Controller
     public function index(){
         $employees = Employee::with(['group' , 'designation'])->get();
 
-        // dd($employees);
-
         return view('employee.all_employee', [
             'employees' => $employees
         ]);
     }
 
-    public function form(){
-
+    public function create(){
         $groups = StaffGroup::with(['designations'])->get();
-
         return view('employee.employee', [
             'groups' => $groups
         ]);
@@ -59,7 +55,6 @@ class EmployeesController extends Controller
             $this->update($request);
             return back()->with('message' , 'Employee Edited Succesfully');
         }
-
 
         else{  
 
@@ -106,10 +101,7 @@ class EmployeesController extends Controller
                 $employee->phone_optional =  $request->phone_optional ;
             }
         
-      
-            
-            $employee->remarks = $request->remarks;
-         
+            $employee->remarks = $request->remarks; 
 
             if($request->status){
                 $employee->status = true ;
@@ -122,7 +114,7 @@ class EmployeesController extends Controller
    }
 
 
-   public function show($id){
+   public function edit($id){
         $employee = Employee::with(['group' ,'designation'])->get();
         $groups = StaffGroup::with(['designations'])->get();
         $employeeSelected = $employee->find($id) ;

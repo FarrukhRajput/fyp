@@ -40,6 +40,7 @@ class LoginController extends Controller
 
     protected function guard()
     {
+        // dd("fsdf");
         return Auth::guard('web');
     }
 }

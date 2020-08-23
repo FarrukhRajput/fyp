@@ -26,32 +26,30 @@ class DesignationController extends Controller
         ]);
     }
 
-    
-    public function create()
-    {
-        //
-    }
 
     
     public function store(Request $request)
     {
 
         request()->validate([
-            'group' => 'required',
-            'title' => 'required'
+            'title' => 'required',
+            'staff_group_id' => 'required'
         ]);
 
         if(@$request->id){
-            dd($request->all());
+
             $this->update($request);
             return back()->with('message' , 'Desgination Updated Succesfully');
 
         }else{
+
             Designation::create([
                 'title' => $request->title,
-                'group_id' => $request->group
+                'staff_group_id' => $request->staff_group_id
             ]);
+
             return back()->with('message' , 'Desgination Created Succesfully');
+
         }
     }
 

@@ -47,31 +47,28 @@
                     @csrf
                     <input type="hidden" value="{{@$designation->id}}" name="id" >
                     <div class="row">
-                        {{-- <div class="col-3">
+                    
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="" class="form-contol-label">Desg ID</label>
-                                <input type="text" class="form-control" disabled value="{{@$designation->id}}">
+                                <label for="" class="form-control-label">Title</label>
+                                <input name="title" type="text" class="form-control" required  value="{{@$designation->title}}" placeholder="Designation">
                             </div>
-                        </div> --}}
+                        </div>
+
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="" class="form-contol-label">Staff Group</label>
-                                <select name="group" class="form-control" >
+                                <select name="staff_group_id" class="form-control" >
                                     <option disabled selected>None</option>
                                     @foreach ($group as $item )
-                                        <option value="{{$item->id}}"  {{@$designation->group->id === $item->id? 'selected': ''  }} >{{$item->title}}</option>
+                                        <option value="{{$item->id}}"  {{@$designation->group->id === $item->id? 'selected': ''  }} >{{ ucwords($item->title)}}</option>
                                     @endforeach
                                 </select>
 
                             </div>
                         </div>
 
-                       <div class="col-12">
-                        <div class="form-group">
-                            <label for="" class="form-control-label">Designation Title</label>
-                            <input name="title" type="text" class="form-control" required  value="{{@$designation->title}}" placeholder="Designation">
-                        </div>
-                       </div>
+                      
                     </div>
 
                     <div class="d-flex justify-content-center">
@@ -81,8 +78,9 @@
                             <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$designation->title}} &#034; ?')" href="{{route('designation.destroy', [ 'id' => $designation ->id ])}}" class="btn btn-danger w-100">
                                 Delete
                             </a>
-                            @else
-                            <button class="btn btn-danger w-100">Clear</button>
+
+                        @else
+                            <button class="btn btn-danger w-100" type="reset">Clear</button>
 
                         @endif
                     </div>
@@ -96,7 +94,7 @@
         <div class="card">
             <div class="card-body ">
                 <div class="card-title py-2"> 
-                    <h5>All Designation  </h5>
+                    <h5>Manage Designations</h5>
                 </div>
                     
                 <div class="table-card">
@@ -104,7 +102,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center"># </th>
-                                <th class="text-center">Designation Title</th> 
+                                <th class="text-center">Title</th> 
                                 <th class="text-center">Staff Group</th> 
                                 <th class="text-center">Action</th>
                             </tr>
@@ -115,9 +113,9 @@
                             @foreach ($designations as $item)    
                             <tr>
                                 <th class="text-center">{{ $item->id }}</th>
-                                <td class="text-center">{{ $item->title }}</td>
+                                <td class="text-center">{{ ucwords( $item->title) }}</td>
                                 <td class="text-center">
-                                        {{ $item->group->title }}
+                                        {{ ucwords($item->group->title) }}
                                 </td>
                                 <td class="d-flex justify-content-center" >
                                     <a href="{{route('designation.show', [ 'id' => $item ->id ])}}" class="btn btn-primary mr-3">
@@ -126,8 +124,7 @@
                                     <a 
                                         onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$item->title}} &#034; ?')" 
                                         href="{{route('designation.destroy', [ 'id' => $item ->id ])}}" 
-                                        class="btn btn-danger"
-                                    >
+                                        class="btn btn-danger">
                                     <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>

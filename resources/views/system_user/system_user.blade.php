@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <h4 class="page-title">Menu Catagories</h4>
+    <h4 class="page-title">System User</h4>
     <a class="btn btn-primary mb-3" href="{{ route('menuCatagory.index') }}"> All Categories</a>
 
 <div class="row">
@@ -41,7 +41,7 @@
                        <div class="col-12">
                             <div class="form-group">
                                 <label for="" class="form-control-label">Title</label>
-                                <input name="title" type="text" class="form-control"  placeholder="Designation">
+                                <input name="title" type="text" class="form-control" required placeholder="Designation">
                             </div>
                        </div>
                     </div>

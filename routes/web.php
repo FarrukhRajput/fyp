@@ -16,6 +16,38 @@ Auth::routes();
 // Home page 
 Route::get('/', 'HomeController@index')->name('home');
 
+
+// STAFF GROUP PAGE()Tested
+Route::prefix('/staff-groups')->group( function() {
+    Route::get('/','StaffGroupController@index')->name('staff.index');
+    Route::post('/','StaffGroupController@store')->name('staff.store');
+    Route::get('/{group}/edit','StaffGroupController@edit')->name('staff.edit');
+    Route::get('/{group}/destroy','StaffGroupController@destroy')->name('staff.destroy');
+    Route::get('/{group}/force-delete','StaffGroupController@forceDelete')->name('staff.forceDelete');
+    Route::get('/{group}/getDesignations','StaffGroupController@getDesignations')->name('staff.getDesignation');
+});
+
+
+// DESIGNATION PAGE (Tested)
+Route::prefix('/designations')->group( function() {
+    Route::get('/','DesignationController@index')->name('designation.index');
+    Route::post('/','DesignationController@store')->name('designation.store');
+    Route::get('/{id}/edit','DesignationController@show')->name('designation.show');
+    Route::get('/{id}/destroy','DesignationController@destroy')->name('designation.destroy');
+});
+
+
+// EMPLOYEES
+Route::prefix('employees')->group( function() {
+    Route::get('/','EmployeesController@index')->name('employee.index');
+    Route::get('/create','EmployeesController@create')->name('employee.create');
+    Route::post('/employees/form','EmployeesController@store')->name('employee.store');
+    Route::get('/{id}/edit','EmployeesController@edit')->name('employee.edit');
+    Route::get('/{id}/destroy','EmployeesController@destroy')->name('employee.destroy');
+});
+
+
+
 // Item Catagories
 Route::get('/item-catagory', 'ItemCatagoriesContoller@index')->name('catagory.index');
 Route::post('/item-catagory', 'ItemCatagoriesContoller@store')->name('catagory.store');
@@ -29,8 +61,9 @@ Route::get('/raw-item/{id}/edit' ,'RawItemController@edit')->name('rawItem.edit'
 Route::get('/raw-item/all' ,'RawItemController@all')->name('rawItem.all');
 Route::get('/raw-item/{rawitem}/delete' ,'RawItemController@destroy')->name('rawItem.destroy');
 
-// Vendors
 
+
+// Vendors
 Route::prefix('/vendor')->group( function(){
     Route::get('/all' ,'VendorsController@index')->name('vendor.index');
     Route::get('/{vendor}/edit','VendorsController@edit')->name('vendor.edit');
@@ -43,29 +76,16 @@ Route::prefix('/vendor')->group( function(){
 
 
 
-// EMPLOYEES
-Route::get('/employees','EmployeesController@index')->name('employee.index');
-Route::get('/employees/form','EmployeesController@form')->name('employee.form');
-Route::get('/employee/{id}/show','EmployeesController@show')->name('employee.show');
-Route::post('/employees/form','EmployeesController@store')->name('employee.store');
-Route::get('/employee/{id}/destroy','EmployeesController@destroy')->name('employee.destroy');
 
-// STAFF GROUP PAGE
 
-Route::get('/staff-group','StaffGroupController@index')->name('staff.index');
-Route::post('/staff-group','StaffGroupController@store')->name('staff.store');
-Route::get('/staff-group/{group}/edit','StaffGroupController@show')->name('staff.show');
-Route::get('/staff-group/{group}/destroy','StaffGroupController@destroy')->name('staff.destroy');
-Route::get('/staff-group/{group}/force-delete','StaffGroupController@forceDelete')->name('staff.forceDelete');
-Route::post('/staff-group/{group}/update','StaffGroupController@update')->name('staff.update');
 
-Route::get('/staff-group/getDesignation/{id}','StaffGroupController@getDesignation')->name('staff.getDesignation');
 
-// DESIGNATION PAGE
-Route::get('/designation','DesignationController@index')->name('designation.index');
-Route::get('/designation/{id}/edit','DesignationController@show')->name('designation.show');
-Route::get('/designation/{id}/destroy','DesignationController@destroy')->name('designation.destroy');
-Route::post('/designation','DesignationController@store')->name('designation.store');
+
+
+
+
+
+
 
 
 // Menu Catagories
@@ -104,6 +124,14 @@ Route::prefix('table')->group( function(){
     Route::get('/all' ,'TableController@all')->name('table.all');
    
 });
+
+
+// 
+Route::prefix('system_users')->group( function(){
+    Route::get('/all' ,'SystemUserController@index')->name('system_users.index');
+    // Route::get('/create' ,'PurchaseController@create')->name('purchase.create');
+});
+
 
 
 

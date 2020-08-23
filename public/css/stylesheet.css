@@ -31,9 +31,11 @@ button:focus{
 }
 
 .theme-bg{
-    color: wheat;
-    background-color: #563d7c !important;
+    color: white;
+    background-color: #283846 !important;
 }
+
+
 
 /********************
     DASHBOARD BRAND
@@ -506,6 +508,15 @@ button:focus{
 
 .puchase-table thead tr th:last-child{
     min-width: 85px;
+}
+
+.force-btn{
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background: orange;
+    color: white !important;
+    box-shadow: -1px 1px 7px 0px #968989;
 }
 
 

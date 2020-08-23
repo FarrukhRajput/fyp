@@ -3,26 +3,31 @@
 
 @section('content')
 
-    <h4 class="page-title">Staff Group</h4>
+    <h4 class="page-title">Staff Groups</h4>
 
 <div class="row">
     <div class="col-4">
 
 
         @if(session()->has('success'))
-            <div class="p-2 mb-2 success "> 
+            <div class="p-2 mb-2 alert alert-success "> 
                 {{ session()->get('success') }}
             </div>
-        @endif
 
 
+        @elseif(session()->has('alert'))
+            <div class="p-2 mb-2 alert alert-danger "> 
+                {{ session()->get('alert') }}
+                <a class="force-btn" href="{{route('staff.forceDelete', ['id' => session()->get('id') ])}}">Force Delete</a>
+            </div>
 
-        @if(session()->has('errors'))
-           <ul>
-               @foreach ($errors as $error)
+
+        @elseif(session()->has('errors'))
+            <ul>
+                @foreach ($errors as $error)
                     <li>{{session()->get('error')}}</li>     
-               @endforeach
-           </ul>
+                @endforeach
+            </ul>
         @endif
 
        
@@ -52,21 +57,16 @@
                     <input name="id" type="hidden" value="{{@$group->id}}">
 
                     <div class="row">
-                        {{-- <div class="col-3">
-                            <div class="form-group">
-                                <label for="" class="form-contol-label">Staff ID</label>
-                                <input type="text" class="form-control" value="{{ @$group->id}}" disabled>
-                            </div>
-                        </div> --}}
                         <div class="col-12">
                             <label for="" class="form-contol-label">Title</label>
-                            <input name="title" value="{{@$group->title}}" type="text" class="form-control" placeholder="Staff Group" required>
+                            <input name="title" value="{{ucwords(@$group->title)}}" type="text" class="form-control" placeholder="Staff Group" required>
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-center mt-4">
                 
                         <button class="btn btn-primary mr-3 w-100" type="submit">{{@$group->id? 'Update' : 'Create'}}</button>
+                                
                         @if(@$group->id)
                             <a href="{{route('staff.destroy' , [ 'group' => $group->id])}}"  onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$group->title}} &#034; ?')"  class="btn btn-danger w-100">
                                 Delete
@@ -85,7 +85,7 @@
         <div class="card">
             <div class="card-body ">
                 <div class="card-title "> 
-                    <h5>All Staff Groups</h5>
+                    <h5>Manage Staff Groups</h5>
                 </div>
                     
                 <div class="table-card">
@@ -93,7 +93,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center"># </th>
-                                <th class="text-center">Staff Group Title</th> 
+                                <th class="text-center">Title</th> 
                                 <th class="text-center">Action</th> 
                             </tr>
                         </thead>
@@ -102,18 +102,35 @@
                             @foreach ($groups as $item)
                                 <tr>
                                     <td class="text-center">{{$item->id}}</td>
-                                    <td class="text-center">{{$item->title}}</td>
+                                    <td class="text-center">{{ ucwords($item->title)}}</td>
                                     <td class="d-flex justify-content-center" >
 
+
+                                        @if ($item->id == 1)
+                                             
+                                            <button class="btn btn-primary mr-3" onclick="return confirm('cannot Edit &#034; {{$item->title}} &#034; ?')" >
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+    
+                                            <button onclick="return confirm('cannot Delete &#034; {{$item->title}} &#034; ?')"  class="btn btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                       
+                                            @else
+                                            <a href="{{route('staff.edit' , ['group' => $item->id])}}" class="btn btn-primary mr-3">
+                                                <i class="fas fa-edit"></i>
+                                             </a>
+     
+                                             <a href="{{route('staff.destroy' , [ 'group' => $item->id])}}" onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$item->title}} &#034; ?')"  class="btn btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                             </a>
+                                       
+                                        @endif
+
                                         
-                                        <a href="{{route('staff.show' , ['group' => $item->id])}}" class="btn btn-primary mr-3">
-                                           <i class="fas fa-edit"></i>
-                                        </a>
+                                      
 
 
-                                        <a href="{{route('staff.destroy' , [ 'group' => $item->id])}}" onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$item->title}} &#034; ?')"  class="btn btn-danger">
-                                           <i class="fas fa-trash-alt"></i>
-                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
