@@ -64,13 +64,19 @@ class RawItemController extends Controller
     }
 
 
-    public function edit(RawItem $rawItem , $id){
+    public function edit($id){
+     
         $catagory = ItemCatagory::all();
         $rawItems = RawItem::find($id);
+        $vendors = Vendor::all();
+
+        // dd($rawItems->vendor_id);
         return view('store.raw_item',[
             'item' => $rawItems, 
-            'title' => 'Edit Raw Item',
-            'catagory' => $catagory ]
+            'vendors' => $vendors,
+            'catagory' => $catagory,
+            
+            ]
         );
     }
 

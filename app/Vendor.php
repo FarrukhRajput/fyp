@@ -19,4 +19,5 @@ class Vendor extends Model
         return $this->hasMany(RawItem::class,'vendor_id');
     }
 
+
 }

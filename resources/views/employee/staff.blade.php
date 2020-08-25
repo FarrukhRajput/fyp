@@ -65,7 +65,7 @@
 
                     <div class="d-flex justify-content-center mt-4">
                 
-                        <button class="btn btn-primary mr-3 w-100" type="submit">{{@$group->id? 'Update' : 'Create'}}</button>
+                        <button class="btn btn-primary mr-3 w-100" type="submit">{{@$group->id? 'Update' : 'Save    '}}</button>
                                 
                         @if(@$group->id)
                             <a href="{{route('staff.destroy' , [ 'group' => $group->id])}}"  onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$group->title}} &#034; ?')"  class="btn btn-danger w-100">
@@ -89,7 +89,7 @@
                 </div>
                     
                 <div class="table-card">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="staff_group_table">
                         <thead>
                             <tr>
                                 <th class="text-center"># </th>
@@ -144,6 +144,17 @@
      </div>
 </div>
 
+@section('addJavaScript')
+<script src="{{asset('js/dataTable/dataTable.min.js')}}"></script>
+    
+<script>
 
+    $('#staff_group_table').DataTable({
+        paging:true,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+    });
+
+</script>
+@endsection
 @endsection
 

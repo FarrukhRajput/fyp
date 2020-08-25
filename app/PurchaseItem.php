@@ -4,7 +4,7 @@ namespace restro;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Purchase extends Model
+class PurchaseItem extends Model
 {
-    protected $fillable = ['invoice_id'];
+    //
 }

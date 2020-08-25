@@ -65,7 +65,7 @@
                                 <select required name="vendor_id" class="form-control" >
                                     <option disabled selected>Select ...</option>
                                         @foreach($vendors as $vendor)
-                                            <option value="{{$vendor->id}}" >{{ ucwords($vendor->f_name.' '.$vendor->l_name) }}</option>
+                                            <option value="{{$vendor->id}}"  {{$item->vendor_id == $vendor->id ? 'selected' : ''}} >{{ ucwords($vendor->f_name.' '.$vendor->l_name) }}</option>
                                         @endforeach
                                 </select>
                             </div>
@@ -91,6 +91,11 @@
                                 <label for="" class="form-label"> Unit</label>
                                 <select class="form-control" name="unit" id="">
                                     <option class="text-center" value="kg">kg</option>
+                                    <option class="text-center" value="ltr">ltr</option>
+                                    <option class="text-center" value="kg">dozen</option>
+                                    <option class="text-center" value="pc">pc</option>
+                                    <option class="text-center" value="gram">grams</option>
+                                    <option class="text-center" value="ml">ml</option>
                                 </select>
                             </div>
                         </div>

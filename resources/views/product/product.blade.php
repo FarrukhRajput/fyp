@@ -12,7 +12,7 @@
 
     @endif
 
-    <a href="{{route('products.create')}}" class="btn btn-primary"> <i class="fas fa-plus mr-2"></i>Create Product</a>
+    <a href="{{route('products.create')}}" class="btn btn-theme"> <i class="fas fa-plus mr-2"></i>Create Product</a>
 
 
     <div class="row mt-4">

@@ -82,7 +82,7 @@
 
         
             <div class="form-group d-flex ">
-                <button type="submit" class="btn btn-primary mr-3  w-100" >{{@$vendor->id? 'Update' : 'Create'}}</button>
+                <button type="submit" class="btn btn-primary mr-3  w-100" >{{@$vendor->id? 'Update' : 'Save'}}</button>
                 @if(@$vendor->id)
                     <a  href="{{route('vendor.delete', [ 'vendor' => $vendor->id ])}}" 
                         onclick="return confirm('Are you sure you want to delete &#034;{{$vendor->title}}&#034; ?')"  

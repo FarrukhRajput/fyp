@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mr-3 w-100">{{  @$category->id ?'Update' : 'Create'}}</button>
+                        <button type="submit" class="btn btn-primary mr-3 w-100">{{  @$category->id ?'Update' : 'Save'}}</button>
 
                         @if(@$category->id )
                             <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$category->title}} &#034; ?')" href="{{route('designation.destroy', [ 'id' => $category ->id ])}}" class="btn btn-danger w-100">

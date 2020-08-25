@@ -220,7 +220,7 @@
     
                     <div class="row mt-3">
                         <div class="offset-10 col-2 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary w-100 mr-3">{{@$employee->id? 'Update ' : 'Create '}}</button>
+                            <button type="submit" class="btn btn-primary w-100 mr-3">{{@$employee->id? 'Update ' : 'Save '}}</button>
                             @if(@$employee->id)
                                 <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{ $employee->f_name.' '. $employee->l_name }} &#034; ?')" 
                                     href="{{route('employee.destroy', [ 'id' => $employee->id ] )}}" class="btn btn-danger w-100">Delete</a>

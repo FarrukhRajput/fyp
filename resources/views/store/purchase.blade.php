@@ -25,7 +25,6 @@
                     <table id="purchaseTable" class="table table-bordered">
                         <thead>
                             <tr>
-                              
                                 <th class="text-center">Vendor Name</th>
                                 <th class="text-center">Company</th>
                                 <th class="text-center">Phone</th>
@@ -36,7 +35,6 @@
 
                         <tbody>
                           
-                         
                         </tbody>
                     </table>
                 </div>

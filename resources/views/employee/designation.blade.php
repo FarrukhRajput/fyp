@@ -51,7 +51,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="" class="form-control-label">Title</label>
-                                <input name="title" type="text" class="form-control" required  value="{{@$designation->title}}" placeholder="Designation">
+                                <input name="title" type="text" class="form-control" required  value="{{ucwords(@$designation->title)}}" placeholder="Designation">
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mr-3 w-100">{{  @$designation->id ?'Update' : 'Create'}}</button>
+                        <button type="submit" class="btn btn-primary mr-3 w-100">{{  @$designation->id ?'Update' : 'Save'}}</button>
 
                         @if(@$designation->id )
                             <a onclick="return confirm('Are Your Sure You Want To Delete &#034; {{$designation->title}} &#034; ?')" href="{{route('designation.destroy', [ 'id' => $designation ->id ])}}" class="btn btn-danger w-100">

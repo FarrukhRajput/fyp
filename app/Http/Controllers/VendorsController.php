@@ -29,23 +29,21 @@ class VendorsController extends Controller
      *  New Vendor Page  
      * */  
     public function create(){
-       
         return view('vendor.create_vendor');
     }
 
 
     public function allVendorProducts($id)
     {
-        $products = Vendor::find($id)->allProducts()->get();
-
+        $products = Vendor::find($id)->getAllProducts()->get();
         return  $products;
     }
 
 
     public function edit($id){
-        $title = "edit vendor"; 
+       
         $vendor = Vendor::find($id);
-        return view('vendor.create_vendor', [ 'title' => $title ,'vendor' => $vendor]);
+        return view('vendor.create_vendor', [ 'vendor' => $vendor]);
      
     }
 
@@ -81,11 +79,7 @@ class VendorsController extends Controller
 
             return back()->with('success', ucwords('Vendor Created Successfully'));
 
-
-            
-
         }
-
      
     }
 
@@ -114,8 +108,6 @@ class VendorsController extends Controller
 
         return redirect()->route('vendor.index')->with('success' , 'Deleted all raw items related to '.$name);
 
-
-        
     }
 
 

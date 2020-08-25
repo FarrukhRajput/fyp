@@ -36,7 +36,6 @@ Route::prefix('/designations')->group( function() {
     Route::get('/{id}/destroy','DesignationController@destroy')->name('designation.destroy');
 });
 
-
 // EMPLOYEES
 Route::prefix('employees')->group( function() {
     Route::get('/','EmployeesController@index')->name('employee.index');
@@ -55,14 +54,13 @@ Route::prefix('/menu')->group( function () {
     Route::get('/category/{id}/destroy' ,'MenuCategoriesController@destroy')->name('menuCatagory.destroy');
     Route::get('/category/{id}/force-delete' ,'MenuCategoriesController@forceDelete')->name('menuCatagory.forceDelete');
 
-
-     // Menu/Product routes
-     Route::get('/product/all' ,'ProductController@show')->name('products.all');
-     Route::get('/product/create' ,'ProductController@create')->name('products.create');
-     Route::post('/product/create' ,'ProductController@store')->name('products.store');
-     Route::get('/product/edit/{id}' ,'ProductController@edit')->name('products.edit');
-     Route::get('/product/update/{id}' ,'ProductController@update')->name('products.update');
-     Route::get('/product/delete/{id}' ,'ProductController@destroy')->name('products.destroy');
+    // Menu/Product routes
+    Route::get('/product/all' ,'ProductController@show')->name('products.all');
+    Route::get('/product/create' ,'ProductController@create')->name('products.create');
+    Route::post('/product/create' ,'ProductController@store')->name('products.store');
+    Route::get('/product/edit/{id}' ,'ProductController@edit')->name('products.edit');
+    Route::get('/product/update/{id}' ,'ProductController@update')->name('products.update');
+    Route::get('/product/delete/{id}' ,'ProductController@destroy')->name('products.destroy');
 });
 
 
@@ -77,30 +75,21 @@ Route::prefix('/store')->group( function ()
     Route::get('/item-category/{id}/delete', 'ItemCatagoriesContoller@destroy')->name('category.delete');
     Route::get('/item-category/{id}/force-delete', 'ItemCatagoriesContoller@forceDelete')->name('category.forceDelete');
    
+
+    // Raw items
+    Route::get('/raw-item' ,'RawItemController@index')->name('rawItem.index');
+    Route::post('/raw-item' ,'RawItemController@store')->name('rawItem.store');
+    Route::get('/raw-item/{id}/edit' ,'RawItemController@edit')->name('rawItem.edit');
+    Route::get('/raw-item/all' ,'RawItemController@all')->name('rawItem.all');
+    Route::get('/raw-item/{rawitem}/delete' ,'RawItemController@destroy')->name('rawItem.destroy');
+
+
+
+    Route::get('purchase/all' ,'PurchaseController@index')->name('purchase.index');
+    Route::get('purchase/create' ,'PurchaseController@create')->name('purchase.create');
+    Route::post('purchase/create' ,'PurchaseController@store')->name('purchase.store');
+
 });
-
-
-
-// Route::resource('/menu-categories', 'MenuCategoriesController')->names([
-//     // 'index' => 'menuCatagory.index',
-//     'store' => 'menuCatagory.store',
-//     // 'create' => 'menuCatagory.create',
-//     'update' => 'menuCatagory.update',
-//     // 'destroy' => 'menuCatagory.destroy'
-// ]);
-
-
-
-
-
-
-// Raw items
-Route::get('/raw-item' ,'RawItemController@index')->name('rawItem.index');
-Route::post('/raw-item' ,'RawItemController@store')->name('rawItem.store');
-Route::get('/raw-item/{id}/edit' ,'RawItemController@edit')->name('rawItem.edit');
-Route::get('/raw-item/all' ,'RawItemController@all')->name('rawItem.all');
-Route::get('/raw-item/{rawitem}/delete' ,'RawItemController@destroy')->name('rawItem.destroy');
-
 
 
 // Vendors
@@ -115,42 +104,19 @@ Route::prefix('/vendor')->group( function() {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::prefix('products')->group( function(){
-    Route::get('/all' ,'ProductController@show')->name('products.all');
-    Route::get('/create' ,'ProductController@create')->name('products.create');
-    Route::get('/edit/{id}' ,'ProductController@edit')->name('products.edit');
-    Route::get('/update/{id}' ,'ProductController@update')->name('products.update');
-    Route::get('/delete/{id}' ,'ProductController@destroy')->name('products.destroy');
-    Route::post('/create' ,'ProductController@store')->name('products.store');
+// System Users
+Route::prefix('system_users')->group( function(){
+    Route::get('/all' ,'SystemUserController@index')->name('system_users.index');
+    Route::post('/all' ,'SystemUserController@store')->name('system_users.store');
+    // Route::get('/create' ,'PurchaseController@create')->name('purchase.create');
 });
 
 
 
-Route::prefix('purchase')->group( function(){
-    Route::get('/all' ,'PurchaseController@index')->name('purchase.index');
-    Route::get('/create' ,'PurchaseController@create')->name('purchase.create');
-});
+
 
 
 // Table
-
 Route::prefix('table')->group( function(){
     // Route::get('/store' ,'TableController@store')->name('TableController.store');
     Route::get('/all' ,'TableController@all')->name('table.all');
@@ -158,18 +124,4 @@ Route::prefix('table')->group( function(){
 });
 
 
-// 
-Route::prefix('system_users')->group( function(){
-    Route::get('/all' ,'SystemUserController@index')->name('system_users.index');
-    // Route::get('/create' ,'PurchaseController@create')->name('purchase.create');
-});
-
-
-
-
-// Route::resource('/products' , 'ProductController')->names([
-//     'create' => 'products.create',
-//     'store' =>  'products.store',
-//     'allProducts' => 'products.index'    
-// ]);
-
+// foodExpiditor/orders

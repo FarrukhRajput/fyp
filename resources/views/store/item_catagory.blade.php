@@ -56,7 +56,7 @@
 
 
                     <div class="form-group d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary mr-3">{{@$category->id ?  'Update': 'Create' }}</button>
+                        <button type="submit" class="btn btn-primary mr-3">{{@$category->id ?  'Update': 'Save' }}</button>
                         @if(@$category->id)
                             <a onclick="return confirm('Are you sure you Delete &#034; {{ ucwords($category->title)}} &#034; category ?')" 
                                 href="{{route('category.delete' ,['vendor' => $category->id] )}}" class="btn btn-danger">Delete</a>
